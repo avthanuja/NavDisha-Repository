@@ -1,0 +1,3473 @@
+openapi: 3.0.0
+info:
+  version: 0.0.1
+  title: Healthpoint API User Acceptance Test
+servers:
+- url: https://uat.healthpointapi.com/baseR4
+tags:
+- name: default
+  description: ""
+  externalDocs:
+    description: FHIR reference
+    url: https://www.hl7.org/fhir/capabilitystatement.html
+- name: HealthcareService
+  description: ""
+  externalDocs:
+    description: FHIR reference
+    url: https://www.hl7.org/fhir/healthcareservice.html
+- name: Location
+  description: ""
+  externalDocs:
+    description: FHIR reference
+    url: https://www.hl7.org/fhir/location.html
+- name: Practitioner
+  description: ""
+  externalDocs:
+    description: FHIR reference
+    url: https://www.hl7.org/fhir/practitioner.html
+- name: PractitionerRole
+  description: ""
+  externalDocs:
+    description: FHIR reference
+    url: https://www.hl7.org/fhir/practitionerrole.html
+security:
+- APIKeyHeader: []
+paths:
+  /metadata:
+    parameters:
+    - name: _format
+      in: query
+      description: Serialization format
+      x-consoleDefault: application/json
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+    tags:
+    - default
+    get:
+      responses:
+        200:
+          description: Success
+  /HealthcareService:
+    get:
+      tags:
+      - HealthcareService
+      responses:
+        403:
+          description: Access denied
+        200:
+          description: Success
+          content:
+            schema:
+              $ref: '#/components/schemas/HealthcareService'
+      parameters: null
+    parameters:
+    - name: category
+      in: query
+      description: |
+        SNOMED code for the broad category of service being performed or delivered.
+        See branch-code.pdf for detailed documentation.
+
+        One of:
+
+        - 310026003: Counselling service
+        - 310080006: Pharmacy service
+        - 310081005: Allied health service
+        - 310105000: Optometry service
+        - 310123008: Psychology service
+        - 310134006: Social services
+        - 413294000: Community health services
+        - 445449000: Hospice service
+        - 700232004: General medical service
+        - 708168004: Mental health service
+        - 714088003: Midwifery service
+        - 722176000: Dentistry service
+        - 788125002: Addiction service
+        - 789789009: Rongoā Māori service
+        - 1234796008: Community nursing service
+        - 61791000210101: Employment Support service
+        - 71481000210103: Stop smoking service
+        - 91581000210106: Pasifika service
+        - 141521000210108: Family whānau support services
+        - 151521000210106: Sexual harm service
+        - 161911000210101: Aged residential care service
+        - 171631000210107: Refuge service
+        - 171641000210104: Kaupapa Māori service
+        - 171701000210108: Cancer support services
+        - 171721000210100: Transport service
+        - 181761000210103: LGBTQIA+ support service
+        - 191631000210104: Abuse and violence service
+        - 191641000210107: Stopping violence service
+        - 301961000210109: Food support service
+        - 382031000210105: Private secondary service
+        - 382041000210102: Private specialist service
+        - 382061000210101: Private surgical service
+        - 382071000210107: Public specialist service
+        - 382171000210106: Birthing facility service
+        - 382221000210104: Hospital-based support service
+        - 466831000210109: Harmful sexual behaviour intervention service
+        - 466871000210106: Wellness and healthy lifestyle programme
+        - 467101000210106: Service navigator
+        - 475901000210108: Accommodation and housing support service
+        - 475911000210105: Budgeting and debt management service
+        - 475921000210100: Community education and training service
+        - 475931000210103: Legal and civil social service
+        - 475981000210104: Refugee and/or migrant support service
+        - 486051000210105: Alcohol and/or drug addiction service
+        - 486161000210109: Gambling harm service
+        - 546121000210104: Non alcohol or drug addiction service
+        - 1241741000168101: Disability support service
+      schema:
+        type: string
+        enum:
+        - 310026003
+        - 310080006
+        - 310081005
+        - 310105000
+        - 310123008
+        - 310134006
+        - 413294000
+        - 445449000
+        - 700232004
+        - 708168004
+        - 714088003
+        - 722176000
+        - 788125002
+        - 789789009
+        - 1234796008
+        - 61791000210101
+        - 71481000210103
+        - 91581000210106
+        - 141521000210108
+        - 151521000210106
+        - 161911000210101
+        - 171631000210107
+        - 171641000210104
+        - 171701000210108
+        - 171721000210100
+        - 181761000210103
+        - 191631000210104
+        - 191641000210107
+        - 301961000210109
+        - 382031000210105
+        - 382041000210102
+        - 382061000210101
+        - 382071000210107
+        - 382171000210106
+        - 382221000210104
+        - 466831000210109
+        - 466871000210106
+        - 467101000210106
+        - 475901000210108
+        - 475911000210105
+        - 475921000210100
+        - 475931000210103
+        - 475981000210104
+        - 486051000210105
+        - 486161000210109
+        - 546121000210104
+        - 1241741000168101
+    - name: type
+      in: query
+      description: |
+        SNOMED code for the type of service that may be delivered or performed.
+        See branch-code.pdf for detailed documentation.
+
+        One of:
+
+        - 7430007: Liquid nitrogen
+        - 7510005: Colour vision test
+        - 12491002: Tooth whitening
+        - 12895002: Breathing and cardiorespiratory physiotherapy
+        - 14747002: Travel vaccinations
+        - 16177004: Orthodontic treatment
+        - 18157004: Orthotics
+        - 20067007: Retinal and fundus photography
+        - 22523008: Vasectomy
+        - 25855006: Neurological rehabilitation
+        - 29303009: ECG
+        - 31890001: Crown lengthening
+        - 34043003: General dental check-up
+        - 38598009: MMR (Measles and mumps and rubella) vaccination
+        - 41088001: Meningococcal vaccination
+        - 44868003: Acupuncture
+        - 52052004: Rehabilitation therapy
+        - 55162003: Tooth extraction
+        - 55670007: Specialised root canal treatment
+        - 65200003: IUD insertion
+        - 65546002: Wisdom tooth extraction
+        - 65943000: Visual rehabilitation
+        - 71735005: Salivary gland surgery
+        - 71882008: Jaw joint surgery
+        - 74036000: Pregnancy confirmation test
+        - 78831002: Eye health examination
+        - 86944008: Visual field testing
+        - 90817005: Home visit by nurse
+        - 103738006: Immigration medicals
+        - 103742009: Repeat prescription
+        - 105388003: Home support carer
+        - 105389006: Personal care assistance at home
+        - 127783003: Lung function test (spirometry)
+        - 127785005: Immunisations
+        - 134185000: Accident prevention
+        - 134187008: Child care and protection
+        - 134395001: Diabetic retinopathy screening
+        - 169553002: Contraception implant insertion
+        - 171071003: Travel health advice
+        - 171128005: Sexually transmitted infection check
+        - 171149006: Cervical screening
+        - 171183004: Diabetes screening
+        - 171215009: Glaucoma screening
+        - 173280002: Reinsert knocked out tooth
+        - 173307000: Tooth restoration
+        - 182964004: End of life care
+        - 182970005: Pain relief
+        - 183001000: Continence care
+        - 183345007: Occupational therapy for daily living
+        - 183418007: Social work
+        - 183681001: Meals on wheels
+        - 185317003: Phone consultation
+        - 225680006: Hearing aid
+        - 225782006: Pain control
+        - 228535001: Skin health care
+        - 228540009: Hand therapy
+        - 228616009: Aids and equipment
+        - 228642009: Life skills
+        - 234673006: Impacted tooth extraction
+        - 234677007: Treatment of gum disease
+        - 234695005: Professional dental clean
+        - 234713009: Fissure sealant
+        - 234785005: Fillings
+        - 243069004: Counselling for survivor of abuse and violence
+        - 243709009: Eyewear - glasses and contact lenses
+        - 243751002: Mobility equipment
+        - 243757003: Incontinence products
+        - 252963001: Children's eye check
+        - 268360001: Vision testing
+        - 275926002: Screening - health check
+        - 278445004: Skills training
+        - 284350006: Dietary education for managing diabetes
+        - 301807007: Contraception implant removal
+        - 310001007: Anaesthesia service
+        - 310004004: Audiological service
+        - 310007006: Child audiology service
+        - 310009009: Newborn hearing screening
+        - 310019003: Tinnitus management service
+        - 310030000: Endoscopy service
+        - 310032008: Intensive care service
+        - 310060005: Obstetrics and gynecology service
+        - 310061009: Gynaecology service
+        - 310063007: Maternity service
+        - 310066004: Paediatric service
+        - 310071006: Pain management service
+        - 310073009: Palliative care service
+        - 310074003: Pathology service
+        - 310087009: Podiatry service
+        - 310090003: Dietitian service
+        - 310093001: Occupational therapy service
+        - 310099002: Child physiotherapy service
+        - 310101009: Speech and language therapy service
+        - 310104001: Child speech and language therapy service
+        - 310109006: Orthotics service
+        - 310116007: Psychiatry (mental health) service
+        - 310118008: Forensic mental health service
+        - 310125001: Radiology service
+        - 310129007: Rehabilitation service
+        - 310140004: Cardiothoracic surgery service
+        - 310144008: General dentist service
+        - 310145009: Oral surgery service
+        - 310146005: Orthodontics service
+        - 310147001: Paediatric dentistry service
+        - 310149003: Ear, nose and throat service
+        - 310156009: General surgical service
+        - 310159002: Neurosurgical service
+        - 310160007: Ophthalmology service
+        - 310161006: Orthopaedic service
+        - 310164003: Plastic surgery service
+        - 310167005: Urology service
+        - 310168000: Vascular surgery service
+        - 311573005: Speech language therapy for stuttering
+        - 311677003: Safe swallowing support
+        - 312618004: Pre-school education
+        - 312651008: Childcare service
+        - 370883005: Abuse prevention education
+        - 372038002: Advocacy
+        - 384742004: Stop smoking support
+        - 385712009: Ostomy care
+        - 385796006: Medicine packaging
+        - 385900001: Ear health care
+        - 385904005: Ear wax removal
+        - 385955003: Foot care
+        - 386229000: Carer support
+        - 386230005: Case management
+        - 386247006: Conflict resolution mediation
+        - 386344002: Laboratory result
+        - 386442002: Social and group activities
+        - 388975008: Weight loss management
+        - 394719009: Doppler assessment
+        - 395086005: Palliative care community nursing service
+        - 398171003: Hearing test
+        - 398780007: Contraception (birth control) advice
+        - 399014008: Diphtheria, pertussis, and tetanus vaccination
+        - 408869004: Musculoskeletal physiotherapy
+        - 408883002: Breastfeeding support
+        - 409004002: Older adult care management
+        - 409071009: Medication administration home visit
+        - 409971007: Emergency service
+        - 410207002: Respiratory care management
+        - 410620009: Well Child/ Tamariki Ora Health Checks birth to three years
+        - 413743008: Physiotherapy for cancer patients
+        - 414384004: Parenting education
+        - 417753008: Patient portal
+        - 424407005: Alcohol or drug education, counselling and support
+        - 424525001: Pregnancy care
+        - 427857000: Disordered eating education
+        - 428291006: Dietary education for managing gut and bowel disorders
+        - 428997004: Cancer counselling
+        - 431482008: Sports diet and nutrition education
+        - 439202006: Blood testing for warfarin user
+        - 439708006: Home visit
+        - 444822002: Prostate screening
+        - 445710004: Lymphoedema care
+        - 448337001: Telehealth consultation
+        - 699849008: Healthy eating education
+        - 700241009: Dermatology service
+        - 700433006: Gastroenterology service
+        - 700434000: Endocrinology service
+        - 708184003: Laboratory service
+        - 708196005: Haematology service
+        - 710803000: Mobility care support
+        - 711107008: Injury support
+        - 713700008: Stop smoking medication
+        - 713838004: Medication for long term conditions
+        - 716542004: Asthma care planning
+        - 718361005: Weight management
+        - 719410009: Video consultation
+        - 722140001: Physiotherapy service
+        - 722170006: Chiropractic service
+        - 722174002: Respiratory service
+        - 722215002: Shingles vaccination
+        - 723231001: Cranial osteopathy
+        - 733810001: Self management support
+        - 734862008: Endodontic service
+        - 734863003: Prosthodontic service
+        - 737854006: Home oxygen management
+        - 761841000: HPV - Human papillomavirus vaccination
+        - 781087000: Adult and child medical care
+        - 788001008: Infectious disease service
+        - 788003006: Nephrology service
+        - 788004000: Clinical genetics service
+        - 788005004: Neurology service
+        - 788007007: GP service
+        - 788008002: Oral and maxillofacial surgery service
+        - 788121006: Allergy and immunology service
+        - 788122004: Sexual health service
+        - 788123009: Radiation oncology service
+        - 789718008: Cardiology service
+        - 792848000: Internal medicine service
+        - 816968003: Labour and birth care
+        - 870422002: Diabetes self management support
+        - 1155836002: Abuse victim support
+        - 1156257007: COVID-19 vaccination
+        - 1156981009: Dental implant
+        - 1172620009: Elder abuse support
+        - 1186717003: Intellectual disability mental health service
+        - 1197766005: Telehealth chat
+        - 1237575008: Oral medicine service
+        - 1254716000: Disability aids
+        - 1255186006: Periodontic service
+        - 1255914002: Burns service
+        - 1256098007: Hospital at home
+        - 1259023009: Mindfulness and mental wellbeing
+        - 1263416007: IUD removal
+        - 1263932002: Sleep education
+        - 1269321004: False teeth (denture)
+        - 1285005000: Dental bridge
+        - 1286901003: Preventative orthodontics
+        - 1335967008: Cancer service
+        - 2351000175106: Sports medicine service
+        - 2391000175104: Bariatric (weight loss) surgery service
+        - 3531000175102: Older people's health service
+        - 3621000175101: Rheumatology service
+        - 23901000087101: Hepatology service
+        - 23911000087104: MURS - Medicines use review service
+        - 24141000087104: Spinal orthopaedic service
+        - 28541000087101: Musculoskeletal service
+        - 50611000210104: Crisis emergency mental health service
+        - 50751000210108: Respite care service
+        - 61721000210104: Child development service
+        - 61751000210108: Fertility service
+        - 61801000210102: Metabolic medicine service
+        - 71531000210101: Wound care service
+        - 141531000210105: Home support service
+        - 141541000210102: Asian support service
+        - 141591000210106: Accident and urgent care service
+        - 151531000210108: Sexual abuse medicine service
+        - 151551000210102: Eating disorder service
+        - 161921000210106: Psychogeriatric residential care
+        - 161931000210108: Aged residential hospital care
+        - 161971000210105: Aged residential respite care
+        - 171711000210105: Patient transport service
+        - 171741000210106: Acupuncture service
+        - 171751000210109: Osteopathy service
+        - 171801000210103: Exercise and activity service
+        - 171811000210101: Community patient support service
+        - 181691000210102: Auditory processing disorder service
+        - 181741000210104: Tertiary student health clinic
+        - 181831000210102: Disability supported accommodation
+        - 192011000210107: Chinese medicine service
+        - 192021000210102: Occupational medicine service
+        - 192031000210100: Well Child Tamariki Ora service
+        - 192101000210106: Family violence intervention service
+        - 211601000210107: Childhood vaccination
+        - 263791000210107: COVID-19 testing
+        - 301971000210103: Youth mentoring and development service
+        - 301981000210101: Pregnancy support service
+        - 301991000210104: Support for dads service
+        - 302001000210101: Young parent support service
+        - 302011000210104: Autism support service
+        - 302021000210109: NASC - Needs assessment and service coordination service
+        - 302031000210106: Community cancer nursing service
+        - 302041000210103: Hearing and vision service
+        - 302051000210100: Rheumatic fever community nursing service
+        - 302061000210102: Male sexual health service
+        - 302071000210108: Whānau Ora service
+        - 302081000210105: Needle exchange service
+        - 302091000210107: Accommodation during cancer treatment service
+        - 302101000210100: Disability transport service
+        - 302111000210103: Armed forces health service
+        - 380771000210109: Provision of My Vaccination document
+        - 381091000210104: Bowel screening
+        - 381111000210108: Breast screening
+        - 382091000210106: Medicinal cannabis service
+        - 382101000210104: GP (general practice) skin cancer service
+        - 382111000210102: Travel medicine service
+        - 382121000210107: Vein treatment service
+        - 382161000210100: Prosthetic eye service
+        - 382181000210108: Prescription collection depot
+        - 382191000210105: GP (general practice) maternity service
+        - 382201000210107: Nurse led practice
+        - 382211000210109: Virtual healthcare clinic
+        - 382241000210105: Pregnancy ultrasound service
+        - 382261000210106: Adult flu vaccination
+        - 382271000210100: Child flu vaccination
+        - 382281000210103: 65 year old vaccination
+        - 382291000210101: 45 year old vaccination
+        - 382301000210102: Catch-up of missed vaccination
+        - 382311000210100: Pregnancy vaccination
+        - 382331000210107: Minor accident and injury care
+        - 382341000210104: Wellbeing programme in general practice
+        - 382671000210102: LARC - long acting reversible contraception
+        - 382681000210100: General practice minor surgery service
+        - 382701000210103: Hospital pharmacy service
+        - 382711000210101: Community pharmacy service
+        - 382731000210108: Breast health service
+        - 390781000210105: Menopausal care service
+        - 392061000210100: Aseptic dispensing
+        - 393121000210103: Clozapine dispensing
+        - 393131000210101: Medicine and needle disposal service
+        - 393141000210109: Selected oral contraception
+        - 393151000210107: Medication for erection problem
+        - 394001000210107: Hepatitis C pharmacy test and treat service
+        - 394031000210102: Dispensing of morning after pill
+        - 394041000210105: HIV PrEP dispensing
+        - 394051000210108: HIV PEP dispensing
+        - 394101000210108: Dispensing medication for hepatitis C
+        - 394851000210103: Privately funded vaccination
+        - 395351000210105: Opioid substitution treatment
+        - 395361000210108: Medication reports
+        - 395371000210102: Urinary tract infection treatment
+        - 429841000210101: Free or subsidised LARC (long acting reversible contraception)
+        - 466491000210107: Abuse and violence information and support
+        - 466501000210102: Supervised contact
+        - 466521000210105: Support groups for survivors of abuse and violence
+        - 466581000210106: Older person day care
+        - 466591000210108: Aged residential dementia care
+        - 466651000210102: Aged residential mental health care
+        - 466661000210104: Aged residential rest home care
+        - 466821000210107: Cancer research service
+        - 466841000210101: Sexual harm training, education and workforce development
+        - 466851000210103: Rape and sexual assault group and peer support
+        - 466861000210100: Rape and sexual assault crisis support
+        - 466881000210108: Wellness and healthy lifestyle service for cancer patient
+        - 466891000210105: Rape and sexual assault counselling and support
+        - 466921000210103: Wig and accessory for cancer patient
+        - 466931000210101: CVD self management education
+        - 466941000210109: Aged residential intellectual disability care
+        - 466951000210107: Women's wellbeing service
+        - 466961000210105: Disability information and support
+        - 466971000210104: Pasifika mobile health service
+        - 466981000210102: Employment support for people with a disability
+        - 466991000210100: Throat swab for rheumatic fever
+        - 467001000210105: Home equipment
+        - 467011000210107: Injury self management
+        - 467031000210100: Kaupapa Māori community health and social service
+        - 467041000210108: Kaupapa Māori Whānau Ora service
+        - 467051000210106: Pasifika Whānau Ora service
+        - 467061000210109: Pasifika community health and social service
+        - 467071000210103: Car seat and use education
+        - 467091000210104: Kaupapa Māori sexual harm service
+        - 467111000210108: Education and training service for people with a disability
+        - 467131000210101: Welfare and advocacy for cancer patient
+        - 467151000210107: Referral to specialist abuse and violence services
+        - 467161000210105: Parent wellbeing support
+        - 467211000210101: Home delivery of medicines
+        - 467221000210106: Free prescriptions for eligible people on fully funded medication
+        - 467331000210103: Support after birth
+        - 467341000210106: Pregnancy and parenting support service
+        - 475941000210106: Consumer rights advice service
+        - 475951000210109: JP service
+        - 475961000210107: Legal advice service
+        - 475971000210101: Tax advice service
+        - 476021000210106: Social services crisis assessment
+        - 476051000210102: Staying at a birthing centre or hospital after giving birth
+        - 476071000210105: Home visit by a midwife (from birth to age 4 - 6 weeks)
+        - 476081000210107: Eye exam for driver's license
+        - 476091000210109: Occupational eye test
+        - 476121000210105: Cosmetic dentistry service
+        - 476131000210107: Treatment of dental cavity or decay
+        - 476181000210106: Gingivitis treatment
+        - 476221000210102: Emergency dental care of adult with community services card (CSC)
+        - 476941000210101: Urgent dental care service
+        - 476941000210101: Urgent dental care service
+        - 476951000210103: Eye injury treatment
+        - 476971000210106: Free dental care for child from birth to end of school year 8
+        - 476971000210106: Free dental care for child from birth to end of school year 8
+        - 476981000210108: Free dental care for adolescents from year 9 until their 18th birthday
+        - 477391000210108: COVID-19 antiviral medicine prescribed by pharmacist
+        - 477401000210106: COVID-19 antiviral medicine prescribed by general practitioner or nurse practitioner
+        - 477411000210108: COVID-19 antiviral medicine privately funded
+        - 477721000210106: ACC Sensitive Claim counselling service
+        - 486061000210108: Gambling harm helpline
+        - 486091000210103: Gambling harm counselling service
+        - 486101000210105: Venue exclusion for problem gambling
+        - 486341000210105: Cosmetic medicine service
+        - 537211000210101: Mental health helpline
+        - 537221000210106: Digital mental health app or online tool
+        - 537231000210108: Youth health service
+        - 537241000210100: Counselling and support - community based
+        - 537251000210102: Hospital mental health inpatient service
+        - 537261000210104: Mental health residential home or housing support service
+        - 537271000210105: Respite service for mental health patient
+        - 537281000210107: Refugee and/or migrant mental health service
+        - 537291000210109: Employment service for people with a mental health condition
+        - 537301000210108: Maternal mental health or addiction service
+        - 537311000210105: Maternal mental health assessment and treatment service
+        - 537321000210100: Maternal alcohol or drug addiction service
+        - 537701000210107: Alcohol or drug helpline
+        - 537721000210104: Residential alcohol and drug treatment (rehabilitation) service
+        - 546061000210105: Peer support - mental health
+        - 546071000210104: Alcohol or drug peer support
+        - 546091000210100: Medical detox service - community based
+        - 546101000210107: Medical detox service - hospital based
+        - 546111000210109: Social detox service
+        - 546131000210102: Other addictions counselling and support
+        - 546141000210105: Kaupapa Māori alcohol or drug addiction service
+        - 546151000210108: Pasifika alcohol or drug addiction service
+        - 546161000210106: Stop smoking helpline
+        - 546171000210100: Maternal stop smoking
+        - 546181000210103: Pasifika stop smoking service
+        - 546191000210101: Kaupapa Māori stop smoking service
+        - 546201000210104: Kaupapa Māori mental health service
+        - 546211000210102: Pasifika mental health service
+        - 546221000210107: Pasifika gambling harm service
+        - 546231000210109: Kaupapa Māori gambling harm service
+        - 546241000210101: Workforce training - mental health
+        - 546251000210103: Workforce training - alcohol or drug addiction
+        - 546261000210100: Workforce training - gambling harm
+        - 546271000210106: Workforce training - stop smoking
+        - 546281000210108: Older adult audiology service
+        - 546291000210105: Older adult dietitian service
+        - 546301000210109: Child dietitian service
+        - 546311000210106: Disability occupational therapy service
+        - 546321000210101: Mental health occupational therapy service
+        - 546331000210104: Older adult occupational therapy service
+        - 546341000210107: Child occupational therapy service
+        - 546351000210105: Child osteopathy service
+        - 546361000210108: Older adult osteopathy service
+        - 546371000210102: Occupational health physiotherapy service
+        - 546381000210100: Older adult physiotherapy service
+        - 546391000210103: Pelvic health physiotherapy service
+        - 546401000210100: Pregnancy and postnatal physiotherapy service
+        - 546411000210103: Sports physiotherapy service
+        - 546421000210108: Diabetic foot care
+        - 546431000210105: Older adult podiatry service
+        - 546441000210102: Sports podiatry service
+        - 546451000210104: Older adult speech and language therapy service
+        - 546461000210101: Post-stroke speech and language therapy
+        - 546481000210109: Physiotherapy for balance and/or dizziness
+        - 555981000210107: Neuropsychology service
+        - 556371000210104: Non-urgent mental health assessment and treatment service
+        - 556381000210102: Maternal counselling and support service - community based
+        - 556391000210100: Support for family of a person with addiction
+        - 556401000210102: Support for family of a person with a mental health condition
+        - 556411000210100: Dietary education for managing food allergies and/or intolerance
+      schema:
+        type: string
+        enum:
+        - 7430007
+        - 7510005
+        - 12491002
+        - 12895002
+        - 14747002
+        - 16177004
+        - 18157004
+        - 20067007
+        - 22523008
+        - 25855006
+        - 29303009
+        - 31890001
+        - 34043003
+        - 38598009
+        - 41088001
+        - 44868003
+        - 52052004
+        - 55162003
+        - 55670007
+        - 65200003
+        - 65546002
+        - 65943000
+        - 71735005
+        - 71882008
+        - 74036000
+        - 78831002
+        - 86944008
+        - 90817005
+        - 103738006
+        - 103742009
+        - 105388003
+        - 105389006
+        - 127783003
+        - 127785005
+        - 134185000
+        - 134187008
+        - 134395001
+        - 169553002
+        - 171071003
+        - 171128005
+        - 171149006
+        - 171183004
+        - 171215009
+        - 173280002
+        - 173307000
+        - 182964004
+        - 182970005
+        - 183001000
+        - 183345007
+        - 183418007
+        - 183681001
+        - 185317003
+        - 225680006
+        - 225782006
+        - 228535001
+        - 228540009
+        - 228616009
+        - 228642009
+        - 234673006
+        - 234677007
+        - 234695005
+        - 234713009
+        - 234785005
+        - 243069004
+        - 243709009
+        - 243751002
+        - 243757003
+        - 252963001
+        - 268360001
+        - 275926002
+        - 278445004
+        - 284350006
+        - 301807007
+        - 310001007
+        - 310004004
+        - 310007006
+        - 310009009
+        - 310019003
+        - 310030000
+        - 310032008
+        - 310060005
+        - 310061009
+        - 310063007
+        - 310066004
+        - 310071006
+        - 310073009
+        - 310074003
+        - 310087009
+        - 310090003
+        - 310093001
+        - 310099002
+        - 310101009
+        - 310104001
+        - 310109006
+        - 310116007
+        - 310118008
+        - 310125001
+        - 310129007
+        - 310140004
+        - 310144008
+        - 310145009
+        - 310146005
+        - 310147001
+        - 310149003
+        - 310156009
+        - 310159002
+        - 310160007
+        - 310161006
+        - 310164003
+        - 310167005
+        - 310168000
+        - 311573005
+        - 311677003
+        - 312618004
+        - 312651008
+        - 370883005
+        - 372038002
+        - 384742004
+        - 385712009
+        - 385796006
+        - 385900001
+        - 385904005
+        - 385955003
+        - 386229000
+        - 386230005
+        - 386247006
+        - 386344002
+        - 386442002
+        - 388975008
+        - 394719009
+        - 395086005
+        - 398171003
+        - 398780007
+        - 399014008
+        - 408869004
+        - 408883002
+        - 409004002
+        - 409071009
+        - 409971007
+        - 410207002
+        - 410620009
+        - 413743008
+        - 414384004
+        - 417753008
+        - 424407005
+        - 424525001
+        - 427857000
+        - 428291006
+        - 428997004
+        - 431482008
+        - 439202006
+        - 439708006
+        - 444822002
+        - 445710004
+        - 448337001
+        - 699849008
+        - 700241009
+        - 700433006
+        - 700434000
+        - 708184003
+        - 708196005
+        - 710803000
+        - 711107008
+        - 713700008
+        - 713838004
+        - 716542004
+        - 718361005
+        - 719410009
+        - 722140001
+        - 722170006
+        - 722174002
+        - 722215002
+        - 723231001
+        - 733810001
+        - 734862008
+        - 734863003
+        - 737854006
+        - 761841000
+        - 781087000
+        - 788001008
+        - 788003006
+        - 788004000
+        - 788005004
+        - 788007007
+        - 788008002
+        - 788121006
+        - 788122004
+        - 788123009
+        - 789718008
+        - 792848000
+        - 816968003
+        - 870422002
+        - 1155836002
+        - 1156257007
+        - 1156981009
+        - 1172620009
+        - 1186717003
+        - 1197766005
+        - 1237575008
+        - 1254716000
+        - 1255186006
+        - 1255914002
+        - 1256098007
+        - 1259023009
+        - 1263416007
+        - 1263932002
+        - 1269321004
+        - 1285005000
+        - 1286901003
+        - 1335967008
+        - 2351000175106
+        - 2391000175104
+        - 3531000175102
+        - 3621000175101
+        - 23901000087101
+        - 23911000087104
+        - 24141000087104
+        - 28541000087101
+        - 50611000210104
+        - 50751000210108
+        - 61721000210104
+        - 61751000210108
+        - 61801000210102
+        - 71531000210101
+        - 141531000210105
+        - 141541000210102
+        - 141591000210106
+        - 151531000210108
+        - 151551000210102
+        - 161921000210106
+        - 161931000210108
+        - 161971000210105
+        - 171711000210105
+        - 171741000210106
+        - 171751000210109
+        - 171801000210103
+        - 171811000210101
+        - 181691000210102
+        - 181741000210104
+        - 181831000210102
+        - 192011000210107
+        - 192021000210102
+        - 192031000210100
+        - 192101000210106
+        - 211601000210107
+        - 263791000210107
+        - 301971000210103
+        - 301981000210101
+        - 301991000210104
+        - 302001000210101
+        - 302011000210104
+        - 302021000210109
+        - 302031000210106
+        - 302041000210103
+        - 302051000210100
+        - 302061000210102
+        - 302071000210108
+        - 302081000210105
+        - 302091000210107
+        - 302101000210100
+        - 302111000210103
+        - 380771000210109
+        - 381091000210104
+        - 381111000210108
+        - 382091000210106
+        - 382101000210104
+        - 382111000210102
+        - 382121000210107
+        - 382161000210100
+        - 382181000210108
+        - 382191000210105
+        - 382201000210107
+        - 382211000210109
+        - 382241000210105
+        - 382261000210106
+        - 382271000210100
+        - 382281000210103
+        - 382291000210101
+        - 382301000210102
+        - 382311000210100
+        - 382331000210107
+        - 382341000210104
+        - 382671000210102
+        - 382681000210100
+        - 382701000210103
+        - 382711000210101
+        - 382731000210108
+        - 390781000210105
+        - 392061000210100
+        - 393121000210103
+        - 393131000210101
+        - 393141000210109
+        - 393151000210107
+        - 394001000210107
+        - 394031000210102
+        - 394041000210105
+        - 394051000210108
+        - 394101000210108
+        - 394851000210103
+        - 395351000210105
+        - 395361000210108
+        - 395371000210102
+        - 429841000210101
+        - 466491000210107
+        - 466501000210102
+        - 466521000210105
+        - 466581000210106
+        - 466591000210108
+        - 466651000210102
+        - 466661000210104
+        - 466821000210107
+        - 466841000210101
+        - 466851000210103
+        - 466861000210100
+        - 466881000210108
+        - 466891000210105
+        - 466921000210103
+        - 466931000210101
+        - 466941000210109
+        - 466951000210107
+        - 466961000210105
+        - 466971000210104
+        - 466981000210102
+        - 466991000210100
+        - 467001000210105
+        - 467011000210107
+        - 467031000210100
+        - 467041000210108
+        - 467051000210106
+        - 467061000210109
+        - 467071000210103
+        - 467091000210104
+        - 467111000210108
+        - 467131000210101
+        - 467151000210107
+        - 467161000210105
+        - 467211000210101
+        - 467221000210106
+        - 467331000210103
+        - 467341000210106
+        - 475941000210106
+        - 475951000210109
+        - 475961000210107
+        - 475971000210101
+        - 476021000210106
+        - 476051000210102
+        - 476071000210105
+        - 476081000210107
+        - 476091000210109
+        - 476121000210105
+        - 476131000210107
+        - 476181000210106
+        - 476221000210102
+        - 476941000210101
+        - 476941000210101
+        - 476951000210103
+        - 476971000210106
+        - 476971000210106
+        - 476981000210108
+        - 477391000210108
+        - 477401000210106
+        - 477411000210108
+        - 477721000210106
+        - 486061000210108
+        - 486091000210103
+        - 486101000210105
+        - 486341000210105
+        - 537211000210101
+        - 537221000210106
+        - 537231000210108
+        - 537241000210100
+        - 537251000210102
+        - 537261000210104
+        - 537271000210105
+        - 537281000210107
+        - 537291000210109
+        - 537301000210108
+        - 537311000210105
+        - 537321000210100
+        - 537701000210107
+        - 537721000210104
+        - 546061000210105
+        - 546071000210104
+        - 546091000210100
+        - 546101000210107
+        - 546111000210109
+        - 546131000210102
+        - 546141000210105
+        - 546151000210108
+        - 546161000210106
+        - 546171000210100
+        - 546181000210103
+        - 546191000210101
+        - 546201000210104
+        - 546211000210102
+        - 546221000210107
+        - 546231000210109
+        - 546241000210101
+        - 546251000210103
+        - 546261000210100
+        - 546271000210106
+        - 546281000210108
+        - 546291000210105
+        - 546301000210109
+        - 546311000210106
+        - 546321000210101
+        - 546331000210104
+        - 546341000210107
+        - 546351000210105
+        - 546361000210108
+        - 546371000210102
+        - 546381000210100
+        - 546391000210103
+        - 546401000210100
+        - 546411000210103
+        - 546421000210108
+        - 546431000210105
+        - 546441000210102
+        - 546451000210104
+        - 546461000210101
+        - 546481000210109
+        - 555981000210107
+        - 556371000210104
+        - 556381000210102
+        - 556391000210100
+        - 556401000210102
+        - 556411000210100
+    - name: specialty
+      in: query
+      description: |
+        SNOMED code for the specialties handled by the HealthcareService.
+        See branch-code.pdf for detailed documentation.
+
+        One of:
+
+        - 394537008: Paediatrics
+        - 394577000: Anaesthesia
+        - 394579002: Cardiology
+        - 394580004: Clinical genetics
+        - 394582007: Dermatology
+        - 394583002: Endocrinology
+        - 394584008: Gastroenterology
+        - 394586005: Gynaecology
+        - 394587001: Psychiatry (mental health specialty)
+        - 394589003: Nephrology
+        - 394591006: Neurology
+        - 394593009: Medical oncology
+        - 394594003: Ophthalmology
+        - 394595002: Pathology
+        - 394602003: Rehabilitation medicine
+        - 394603008: Cardiothoracic surgery
+        - 394604002: Ear, nose and throat surgery
+        - 394605001: Oral surgery
+        - 394607009: Paediatric dentistry
+        - 394608004: Orthodontist specialty
+        - 394609007: General surgery
+        - 394610002: Neurosurgery
+        - 394611003: Plastic surgery
+        - 394612005: Urology
+        - 394803006: Haematology
+        - 394806003: Palliative care
+        - 394807007: Infectious diseases
+        - 394810000: Rheumatology
+        - 394811001: Older people's health
+        - 394821009: Occupational medicine
+        - 394882004: Pain management
+        - 394914008: Radiology
+        - 408439002: Allergy - specialty
+        - 408441001: Endodontics - specialty
+        - 408443003: General medical practice
+        - 408444009: General dental practice
+        - 408460008: Prosthodontics
+        - 408461007: Periodontics
+        - 408462000: Burns care
+        - 408463005: Vascular surgery
+        - 408465003: Oral and maxillofacial surgery
+        - 408470005: Maternity care specialty
+        - 408472002: Hepatology
+        - 408478003: Intensive care
+        - 408480009: Immunology
+        - 418112009: Respiratory medicine
+        - 418960008: Ear, nose and throat specialty
+        - 419192003: Internal medicine
+        - 419815003: Radiation oncology
+        - 722163006: Dentistry
+        - 773568002: Emergency medicine
+        - 1251536003: Sports medicine
+        - 1251545002: Travel medicine
+        - 1251546001: Sexual health
+        - 1255736009: Laboratory
+        - 1258957008: Hospital pharmacy
+        - 1259957004: Oral medicine
+        - 1268907002: Community pharmacy
+        - 1303756001: Phlebology
+        - 1306761006: Cosmetic medicine
+        - 24151000087101: Spinal orthopaedics
+        - 24241000087106: Orthopaedics
+        - 28551000087103: Musculoskeletal
+        - 382581000210101: Metabolic medicine
+        - 382591000210104: Sexual abuse specialty
+        - 382601000210109: Urgent care medicine
+        - 382611000210106: Nursing led practice
+        - 382631000210104: Medicinal cannabis specialty
+        - 382641000210107: Skin cancer doctor
+        - 382741000210100: Fertility specialty
+      schema:
+        type: string
+        enum:
+        - 394537008
+        - 394577000
+        - 394579002
+        - 394580004
+        - 394582007
+        - 394583002
+        - 394584008
+        - 394586005
+        - 394587001
+        - 394589003
+        - 394591006
+        - 394593009
+        - 394594003
+        - 394595002
+        - 394602003
+        - 394603008
+        - 394604002
+        - 394605001
+        - 394607009
+        - 394608004
+        - 394609007
+        - 394610002
+        - 394611003
+        - 394612005
+        - 394803006
+        - 394806003
+        - 394807007
+        - 394810000
+        - 394811001
+        - 394821009
+        - 394882004
+        - 394914008
+        - 408439002
+        - 408441001
+        - 408443003
+        - 408444009
+        - 408460008
+        - 408461007
+        - 408462000
+        - 408463005
+        - 408465003
+        - 408470005
+        - 408472002
+        - 408478003
+        - 408480009
+        - 418112009
+        - 418960008
+        - 419192003
+        - 419815003
+        - 722163006
+        - 773568002
+        - 1251536003
+        - 1251545002
+        - 1251546001
+        - 1255736009
+        - 1258957008
+        - 1259957004
+        - 1268907002
+        - 1303756001
+        - 1306761006
+        - 24151000087101
+        - 24241000087106
+        - 28551000087103
+        - 382581000210101
+        - 382591000210104
+        - 382601000210109
+        - 382611000210106
+        - 382631000210104
+        - 382641000210107
+        - 382741000210100
+    - name: branch-code
+      in: query
+      description: To be deprecated August 2025 - Broader categorisation of service being performed or delivered (Level 1 (branch) as defined by Healthpoint).
+      schema:
+        type: string
+        enum:
+        - aged-residential-care
+        - alliedhealth
+        - dentistry
+        - midwives
+        - ngomentalhealth
+        - optometry
+        - pharmacy
+        - primary
+        - privatespecialists
+        - publicspecialists
+        - social
+        - specialised-primary
+    - name: healthpoint-service-type
+      in: query
+      description: To be deprecated August 2025 - Categorisation of service being performed or delivered (Level 2 as defined by Healthpoint).
+      schema:
+        type: string
+        enum:
+        - Abuse and Violence Support Service
+        - Accident & Urgent Medical Care Service
+        - Acupuncture Service
+        - Aged Residential Care Service
+        - Audiology Service
+        - Cancer Network Group Service
+        - Chinese Medicine Service
+        - Chiropractor Service
+        - Community Health Service
+        - Dietitian Service
+        - Endodontist Service
+        - General Dentist Service
+        - General Practice (GP) - Maternity Service
+        - General Practice (GP) Service
+        - Hospital-based support service
+        - Hospital Pharmacy Service
+        - Kaupapa Māori Service
+        - Mental Health & Addictions Service
+        - Midwifery Service
+        - Nurse Led Practice Service
+        - Occupational Therapy (OT) Service
+        - Optometry Service
+        - Oral & Maxillofacial Surgery Service
+        - Oral Medicine Specialist Service
+        - Oral Surgery Specialist Service
+        - Orthodontist Service
+        - Orthotics Service
+        - Paediatric Dentist Service
+        - Pacific People Service
+        - Periodontist Service
+        - Pharmacy Service
+        - Physiotherapy Service
+        - Podiatry Service
+        - Prescription Collection Depot Service
+        - Private Service
+        - Private Surgical Service
+        - Prosthodontist Service
+        - Public Service
+        - Refuge Service
+        - Sexual Harm Service
+        - Social Service
+        - Speech Language Therapy Service
+        - Specialised Primary Healthcare - Cosmetic Medicine Service
+        - Specialised Primary Healthcare - Medicinal Cannabis Service
+        - Specialised Primary Healthcare - Sexual and Reproductive Health Service
+        - Specialised Primary Healthcare - Skin Cancer Service
+        - Specialised Primary Healthcare - Travel Medicine Service
+        - Specialised Primary Healthcare - Vein Treatment Service
+        - Specialised Primary Healthcare - Workplace Health Service
+        - Stopping Violence Service
+        - Virtual Care Clinic Service
+    - name: services-provided-type
+      in: query
+      description: To be deprecated August 2025 - Types of services that may be performed or delivered (Level 3 (most detailed) as defined by Healthpoint).
+      schema:
+        type: string
+        enum:
+        - Abuse and violence support
+        - Accommodation and housing support
+        - Acupuncture
+        - Adult and Child Medical Care
+        - Advocacy
+        - Aged residential care
+        - Aids and equipment
+        - Aseptic dispensing
+        - Asian services
+        - Audiology
+        - Blood testing for warfarin user
+        - Bridges and dentures (false teeth)
+        - Budgeting and help with debt
+        - Cosmetic medicine
+        - COVID-19 Care in the Community
+        - COVID-19 Testing
+        - COVID-19 Vaccination and Boosters
+        - COVID-19 antiviral medicine (if you have a prescription from your doctor or nurse)
+        - COVID-19 antiviral medicine (if you may be eligible but don’t have a prescription)
+        - Cancer support
+        - Cervical Screening
+        - Children’s Vision Testing
+        - Chinese Medicine
+        - Chiropractor
+        - Clozapine dispensing
+        - Colour Vision Testing
+        - Community COVID-19 / Coronavirus Testing Centre
+        - Community nursing
+        - Cosmetic dentistry
+        - Cosmetic medicine
+        - Counselling
+        - Crooked teeth and malocclusions
+        - Crown lengthening
+        - Custom item
+        - Dental caries (dental cavities, tooth decay)
+        - Dental implants
+        - Diabetic Retinopathy Screening
+        - Dietitian
+        - Disability aids
+        - Disability support services
+        - Drivers Licence Testing
+        - ECG
+        - Education and training
+        - Elder abuse
+        - Emergency contraceptive pill (ECP) | Morning after pill
+        - Employment
+        - End of life care
+        - Eye Health Examinations
+        - Eye Injuries
+        - Eyewear
+        - Family / whānau support
+        - Fillings
+        - Fissure sealants
+        - Food support
+        - Free after hours prescriptions for under 14s
+        - General dental check-up
+        - Gingivitis
+        - Glaucoma Screening
+        - Harmful sexual behaviour
+        - HIV PrEP and PEP dispensing (same day or by pre-order)
+        - Health screening
+        - Home Visits From a Midwife (From Birth to 4 - 6 Weeks)
+        - Home support
+        - Hospice
+        - IUCD Insertion
+        - Immigration Medicals
+        - Immunisation
+        - Incontinence products
+        - Information & support
+        - Injury support services
+        - Kaupapa Māori
+        - Knocked out teeth
+        - LGBTIQA+ support
+        - Lab Results
+        - Labour and Birth Care
+        - Legal / civil services
+        - Liquid Nitrogen
+        - Long Acting Reversible Contraception (LARC)
+        - Lung function test (Spirometry)
+        - Maviret dispensing for hepatitis C
+        - Medication for erection problem
+        - Medication for long term conditions
+        - Medication reports
+        - Medicines packaging
+        - Medicine and needles disposal service
+        - Medicinal cannabis
+        - Medicines use review service (MURS)
+        - Methadone dispensing
+        - Minor Accident and Injury Care
+        - Minor Surgery
+        - My Vaccine Pass - get in person
+        - Needle exchange service
+        - Nurse clinic
+        - Occupational Testing
+        - Occupational therapy (OT)
+        - Ongoing Care for You and Your Baby
+        - Oral Medicine Specialist Service
+        - Orthodontic treatment
+        - Orthotics
+        - Orthotics Service
+        - Osteopathy
+        - Pacific people
+        - Pain relief for dental treatment
+        - Patient Portal
+        - Periodontitis (periodontal disease, gum disease)
+        - Physiotherapy
+        - Podiatry
+        - Pregnancy Care
+        - Pregnancy and parenting
+        - Preventative orthodontics
+        - Professional dental clean
+        - Refuge
+        - Refugee / migrant support
+        - Repeat Prescriptions
+        - Restoration of teeth
+        - Retinal & Fundus Photography
+        - Rongoā Māori | Māori healing
+        - Root canal fillings (endodontic treatment)
+        - Salivary gland surgery
+        - Selected oral contraceptives
+        - Service navigator
+        - Sexual Harm Service
+        - Sexual abuse medical
+        - Sexual and reproductive health
+        - Sexual harm - Kaupapa Māori services
+        - Sexual harm - training, education, workforce development
+        - Sexual harm victims/survivors - Do you need ACC counselling?
+        - Sexual harm victims/survivors - Do you need help and support?
+        - Skin cancer service
+        - Social and group activities
+        - Social services crisis assessment
+        - Social work
+        - Specialised Primary Healthcare Service
+        - Specialised wound care
+        - Speech language therapy
+        - Staying in Hospital/Birth Centre After the Birth
+        - Stop smoking medication
+        - Stopping violence services
+        - Teeth whitening
+        - Telehealth Consultation
+        - Temporomandibular joint (TMJ) surgery
+        - Tooth extraction
+        - Transport
+        - Travel Health Advice
+        - Travel medicine
+        - Treatment of periodontitis (periodontal disease, gum disease)
+        - Vasectomy
+        - Vein treatment
+        - Vision Testing (acuity, refraction errors and field of vision tests)
+        - Visual Field Testing
+        - Well Child/Tamariki Ora Health Checks – Birth to Three Years
+        - Wellbeing programme in General Practice (IPMHA)
+        - Wellness / healthy lifestyle
+        - Whānau Ora
+        - Wisdom tooth and impacted tooth extraction
+        - Workplace health
+        - UTI – Urinary tract infection treatment
+        - Youth mentoring / development
+    - name: programme-region
+      in: query
+      description: Mental Health & Addiction services only. Region in NZ that a mental health and/or addictions programme is provided in.
+      schema:
+        type: string
+        enum:
+        - Bay of Plenty
+        - Canterbury
+        - Central Auckland
+        - Central Lakes
+        - Dunedin - South Otago
+        - East Auckland
+        - Hawkes Bay
+        - Hutt
+        - Lakes
+        - MidCentral
+        - Nelson Marlborough
+        - North Auckland
+        - Northland
+        - South Auckland
+        - South Canterbury
+        - Southland
+        - Tairawhiti
+        - Taranaki
+        - Waikato
+        - Wairarapa
+        - Waitaki
+        - Wellington
+        - West Auckland
+        - West Coast
+        - Whanganui
+    - name: programme-area
+      in: query
+      description: Mental Health & Addiction services only. Categorisations of mental health and addiction services.
+      schema:
+        type: string
+        enum:
+        - Addictions - drug & alcohol
+        - Crisis / acute
+        - Detox and rehabilitation
+        - Family / whānau support
+        - Gambling harm
+        - Helplines / e-mental health
+        - Kaupapa Māori
+        - Maternal mental health or addiction
+        - Mental health
+        - Other addictions
+        - Pasifika
+        - Stop smoking
+    - name: programme-type
+      in: query
+      description: Mental Health & Addiction services only. Type of mental health or addiction programme provided.
+      schema:
+        type: string
+        enum:
+        - Alcohol or drug counselling and support
+        - Alcohol or drug helpline
+        - Coexisting problems – mental health & addictions
+        - Community (medical detox)
+        - Counselling and support
+        - DHB Mental Health Crisis
+        - Disability support
+        - Eating disorders
+        - e-mental health apps and online tools
+        - Forensic
+        - Gambling harm counselling
+        - Gambling harm helpline
+        - Hospital (medical detox)
+        - Hospital inpatient unit
+        - Kaupapa Māori alcohol or drug addiction
+        - Kaupapa Māori gambling harm
+        - Kaupapa Māori mental health
+        - Kaupapa Māori stop smoking
+        - Maternal alcohol or drug addiction
+        - Maternal counselling and support
+        - Maternal mental health assessment and treatment
+        - Maternal stop smoking
+        - Mental health assessment and treatment
+        - Mental health helpline
+        - Opioid substitution treatment
+        - Other addictions counselling and support
+        - Pasifika alcohol or drug addiction
+        - Pasifika gambling harm
+        - Pasifika mental health
+        - Pasifika stop smoking
+        - Peer support (alcohol or drug)
+        - Refugee / migrant
+        - Residential alcohol and drug treatment (rehabilitation)
+        - Respite
+        - Social detox
+        - Stop smoking helpline
+        - Stop smoking support
+        - Supported employment
+        - Supported housing
+        - Venue exclusion for problem gamblers
+        - Workforce training - alcohol or drug addiction
+        - Workforce training - gambling harm
+        - Workforce training - mental health
+        - Workforce training - stop smoking
+    - name: programme-age-groups
+      in: query
+      description: Mental Health & Addiction services only. Age groups that are eligible for a mental health and/or addictions programme.
+      schema:
+        type: string
+        enum:
+        - Adult / Pakeke
+        - Child / Tamariki
+        - Older adult / Kaumātua
+        - Youth / Rangatahi
+    - name: programme-referral-type
+      in: query
+      description: Mental Health & Addiction services only. Referral types accepted by a mental health and/or addictions programme.
+      schema:
+        type: string
+        enum:
+        - Self referral
+        - GP
+        - DHB clinical services
+        - Corrections
+    - name: hpi-facility
+      in: query
+      description: HPI Facility ID issued by the Ministry of Health to name facilities (locations) where an organisation provides health services.
+      schema:
+        type: string
+    - name: identifier
+      in: query
+      description: HPI Organisation ID issued by the Ministry of Health to organisations that provide health services.
+      schema:
+        type: string
+    - name: _id
+      in: query
+      description: Healthpoint ID for a healthcare service resource.
+      schema:
+        type: string
+    - name: name
+      in: query
+      description: Healthcare service name
+      schema:
+        type: string
+    - name: location
+      in: query
+      description: Healthpoint ID for a location resource, that a healthcare service is provided at.
+      schema:
+        type: string
+    - name: region
+      in: query
+      description: Region in New Zealand that a service is available to residents of, or geographically located in.
+      schema:
+        type: string
+        enum:
+        - Bay of Plenty
+        - Canterbury
+        - Central Auckland
+        - Central Lakes
+        - Dunedin - South Otago
+        - East Auckland
+        - Hawkes Bay
+        - Hutt
+        - Lakes
+        - MidCentral
+        - Nelson Marlborough
+        - North Auckland
+        - Northland
+        - South Auckland
+        - South Canterbury
+        - Southland
+        - Tairawhiti
+        - Taranaki
+        - Waikato
+        - Wairarapa
+        - Waitaki
+        - Wellington
+        - West Auckland
+        - West Coast
+        - Whanganui
+    - name: dhb-region
+      in: query
+      description: DHB region that a service is available to residents of, or that the service is geographically based in.
+      schema:
+        type: string
+        enum:
+        - Bay of Plenty
+        - Canterbury
+        - Central Auckland
+        - CM Health
+        - Hawkes Bay
+        - Hutt
+        - Lakes
+        - MidCentral
+        - Nelson Marlborough
+        - Northland
+        - South Canterbury
+        - Southern
+        - Tairawhiti
+        - Taranaki
+        - Waikato
+        - Wairarapa
+        - Waitemata DHB
+        - Wellington
+        - West Coast
+        - Whanganui
+    - name: subregion
+      in: query
+      description: Subregion (suburb or town).
+      schema:
+        type: string
+        enum:
+        - Addington
+        - Addison
+        - Airport Oaks
+        - Ahipara
+        - Akaroa
+        - Albany
+        - Alexandra
+        - Alfriston
+        - Amberley
+        - Aranui
+        - Ardmore
+        - Aro Valley
+        - Arrowtown
+        - Ascot Park
+        - Ashburton
+        - Auckland Airport
+        - Auckland Central
+        - Avalon
+        - Avondale
+        - Avonhead
+        - Avonside
+        - Awakino
+        - Awanui
+        - Awhitu Peninsula
+        - Balclutha
+        - Balmoral
+        - Bayswater
+        - Bayview
+        - Beach Haven
+        - Beachlands
+        - Beckenham
+        - Beerescourt
+        - Belfast
+        - Belmont
+        - Berhampore
+        - Bethells Beach
+        - Bexley
+        - Birkdale
+        - Birkenhead
+        - Bishopdale
+        - Blenheim
+        - Blockhouse Bay
+        - Bluff
+        - Bombay
+        - Botany Downs
+        - Breaker Bay
+        - Broadmeadows
+        - Broadwood
+        - Bromley
+        - Brookby
+        - Brooklands
+        - Brooklyn
+        - Browns Bay
+        - Bryndwr
+        - Bucklands Beach
+        - Bulls
+        - Burnham
+        - Burnside
+        - Burswood
+        - Burwood
+        - Camborne
+        - Cambridge
+        - Campbells Bay
+        - Cannons Creek
+        - Carterton
+        - Casebrook
+        - Cashmere
+        - Castor Bay
+        - Chapel Downs
+        - Chartwell
+        - Chatham Islands
+        - Chatswood
+        - Cheviot
+        - Christchurch Central
+        - Churton Park
+        - Clarks Beach
+        - Claudelands
+        - Clendon
+        - Clevedon
+        - Clive
+        - Clover Park
+        - Clyde
+        - Coatesville
+        - Cockle Bay
+        - Conifer Grove
+        - Coopers Beach
+        - Coromandel
+        - Crofton Downs
+        - Cromwell
+        - Dairy Flat
+        - Dallington
+        - Dannemora
+        - Dannevirke
+        - Darfield
+        - Dargaville
+        - Days Bay
+        - Devonport
+        - Diamond Harbour
+        - Dinsdale
+        - Drury
+        - Dunedin
+        - East Tāmaki
+        - Eastbourne
+        - Eastern Beach
+        - Eden Terrace
+        - Edgecumbe
+        - Edgeware
+        - Eketahuna
+        - Eketāhuna
+        - Ellerslie
+        - Elsdon
+        - Eltham
+        - Enderley
+        - Epsom
+        - Eskdale
+        - Fairburn
+        - Fairfield
+        - Fairlie
+        - Farm Cove
+        - Favona
+        - Featherston
+        - Feilding
+        - Fendalton
+        - Ferrymead
+        - Flagstaff
+        - Flamboro Heights
+        - Flat Bush
+        - Forrest Hill
+        - Fox Glacier
+        - Foxton
+        - Frankton
+        - Franz Josef Glacier
+        - Freemans Bay
+        - Geraldine
+        - Gisborne
+        - Glen Eden
+        - Glen Innes
+        - Glendene
+        - Glendowie
+        - Glenfield
+        - Glenside
+        - Glenview
+        - Golden Gate
+        - Golflands
+        - Goodwood Heights
+        - Gore
+        - Grafton
+        - Great Barrier Island
+        - Green Bay
+        - Greenacres
+        - Greenhithe
+        - Greenlane
+        - Greenmeadows
+        - Grenada North
+        - Grenada Village
+        - Grey Lynn
+        - Greymouth
+        - Greytown
+        - Gulf Harbour
+        - Haast
+        - Half Moon Bay
+        - Halswell
+        - Hamilton Central
+        - Hamilton East
+        - Hamilton Lake
+        - Hamilton North
+        - Hamilton West
+        - Hanmer Springs
+        - Harewood
+        - Hari Hari
+        - Hastings
+        - Hataitai
+        - Hauraki
+        - Havelock
+        - Havelock North
+        - Hāwera
+        - Heathcote Valley
+        - Hector
+        - Hei Hei
+        - Helensville
+        - Henderson
+        - Henderson North
+        - Henderson Valley
+        - Herne Bay
+        - Heron Point
+        - Hicks Bay
+        - Highbury
+        - Highland Park
+        - Hihi
+        - Hikurangi
+        - Hill Park
+        - Hillcrest
+        - Hillmorton
+        - Hillsborough
+        - Himatangi Beach
+        - Hobsonville
+        - Hokitika
+        - Hoon Hay
+        - Hornby
+        - Houghton Bay
+        - Howick
+        - Huapai
+        - Huntington
+        - Huntly
+        - Huntsbury
+        - Ilam
+        - Inglewood
+        - Invercargill
+        - Island Bay
+        - Islington
+        - Johnsonville
+        - Johnsonville East
+        - Judgeford
+        - Kaeo
+        - Kaiapoi
+        - Kaikohe
+        - Kaikōura
+        - Kaingaroa
+        - Kaingaroa Forest Village
+        - Kaipara
+        - Kaitaia
+        - Kaiwharawhara
+        - Karaka
+        - Karaka Bay
+        - Karamea
+        - Karehana Bay
+        - Karikari Peninsula
+        - Karitane
+        - Karori
+        - Karori West
+        - Katikati
+        - Kaukapakapa
+        - Kaurilands
+        - Kawakawa
+        - Kawakawa Bay
+        - Kawerau
+        - Kawhia
+        - Kelburn
+        - Kelston
+        - Kena Kena
+        - Kerikeri
+        - Khandallah
+        - Kilbirnie
+        - Kingsland
+        - Kingston
+        - Kohimarama
+        - Kohukohu
+        - Kowhai Park
+        - Kumeū
+        - Kurow
+        - Lake Ohia
+        - Lawrence
+        - Leeston
+        - Levin
+        - Lincoln
+        - Linden
+        - Lindenvale
+        - Linwood
+        - Long Bay
+        - Longford Park
+        - Lower Hutt
+        - Lumsden
+        - Lyall Bay
+        - Lynfield
+        - Lyttelton
+        - Mahana
+        - Mahia Park
+        - Mairangi Bay
+        - Mairehau
+        - Mana
+        - Mangakino
+        - Mangamuka
+        - Mangawhai
+        - Māngere
+        - Māngere Bridge
+        - Māngere East
+        - Manukau
+        - Manukau Heights
+        - Manurewa
+        - Manurewa East
+        - Mapua
+        - Maraetai
+        - Marshland
+        - Martinborough
+        - Marton
+        - Massey
+        - Masterton
+        - Matakana
+        - Matamata
+        - Matata
+        - Mataura
+        - Maungaturoto
+        - Maupuia
+        - Meadowbank
+        - Meadowlands
+        - Mechanics Bay
+        - Mellons Bay
+        - Melrose
+        - Melville
+        - Merivale
+        - Methven
+        - Middlemarch
+        - Middlemore
+        - Middleton
+        - Milford
+        - Millwater
+        - Milton
+        - Miramar
+        - Miranda
+        - Mission Bay
+        - Mitchelltown
+        - Moa Point
+        - Moana
+        - Moeraki
+        - Moerewa
+        - Mōkau
+        - Morningside
+        - Mornington
+        - Morrinsville
+        - Mosgiel
+        - Motueka
+        - Mount Albert
+        - Mount Eden
+        - Mount Maunganui
+        - Mount Roskill
+        - Mount Wellington
+        - Mt Cook
+        - Mt Pleasant
+        - Mt Victoria
+        - Murchison
+        - Muriwai
+        - Murphys Heights
+        - Murray Aynsley
+        - Murrays Bay
+        - Murupara
+        - Naenae
+        - Napier
+        - Narrow Neck
+        - National Park
+        - Nawton
+        - Nelson
+        - New Brighton
+        - New Lynn
+        - New Plymouth
+        - New Windsor
+        - Newlands
+        - Newmarket
+        - Newton
+        - Newtown
+        - Ngaio
+        - Ngāruawāhia
+        - Ngatea
+        - Ngauranga
+        - Nightcaps
+        - North Harbour
+        - North Park
+        - Northcote
+        - Northcote Central
+        - Northcote Point
+        - Northcross
+        - Northland
+        - Northpark
+        - Northwood
+        - Oaklands
+        - Ōakura
+        - Ōamaru
+        - Ohai
+        - Ohakune
+        - Ohaupo
+        - Ōhope
+        - Ōkaihau
+        - Omakau
+        - Ōmāpere
+        - Ōmarama
+        - Omokoroa
+        - One Tree Hill
+        - Onehunga
+        - Onepoto
+        - Opaheke
+        - Ōpāwa
+        - Opononi
+        - Ōpōtiki
+        - Opua
+        - Ōpunake
+        - Orakei
+        - Oranga
+        - Oratia
+        - Ōrere Point
+        - Ōrewa
+        - Oriental Bay
+        - Ōtāhuhu
+        - Otaihanga
+        - Ōtaki
+        - Otane
+        - Ōtara
+        - Otautau
+        - Ōtorohanga
+        - Ōtūmoetai
+        - Outram
+        - Owairaka
+        - Owaka
+        - Owhiro Bay
+        - Oxford
+        - Paekakariki
+        - Paeroa
+        - Pahiatua
+        - Pahurehure
+        - Paihia
+        - Pakuranga
+        - Palmerston
+        - Palmerston North
+        - Panguru
+        - Panmure
+        - Papakowhai
+        - Papakura
+        - Papakura Central
+        - Pāpāmoa
+        - Papanui
+        - Paparangi
+        - Paparoa
+        - Papatoetoe
+        - Parakai
+        - Paraparaumu
+        - Paraparaumu Beach
+        - Paremata
+        - Parklands
+        - Parnell
+        - Pātea
+        - Patumahoe
+        - Pauanui
+        - Pauatahanui
+        - Pawarenga
+        - Pegasus
+        - Penrose
+        - Peria
+        - Petone
+        - Phillipstown
+        - Picton
+        - Pinehill
+        - Piopio
+        - Pipitea
+        - Pleasant Point
+        - Plimmerton
+        - Point Chevalier
+        - Point England
+        - Pōkeno
+        - Ponsonby
+        - Porchester Park
+        - Porirua
+        - Porirua East
+        - Port Chalmers
+        - Portobello
+        - Prebbleton
+        - Puhinui
+        - Pukekohe
+        - Pukenui
+        - Pukerua Bay
+        - Putāruru
+        - Queenstown
+        - Raetihi
+        - Raglan
+        - Rakaia
+        - Randwick Park
+        - Ranfurly
+        - Rangiora
+        - Rangitaikei
+        - Rangoon Heights
+        - Rānui
+        - Ranui Heights
+        - Raroa
+        - Raumati
+        - Raumati Beach
+        - Raumati South
+        - Rawene
+        - Red Beach
+        - Red Hill
+        - Redcliffs
+        - Redoubt Park
+        - Redwood
+        - Reefton
+        - Regents Park
+        - Reikorangi
+        - Remuera
+        - Renwick
+        - Reporoa
+        - Riccarton
+        - Richmond
+        - Richmond Park
+        - Riverhead
+        - Riverton
+        - Rolleston
+        - Rongotai
+        - Rosedale
+        - Rosehill
+        - Roseneath
+        - Rotherham
+        - Rothesay Bay
+        - Rotorua
+        - Rototuna
+        - Roxburgh
+        - Royal Heights
+        - Royal Oak
+        - Ruakākā
+        - Ruakura
+        - Ruatahuna
+        - Ruatōria
+        - Ruawai
+        - Russell
+        - Russley
+        - Saint Heliers
+        - Saint Johns
+        - Saint Mary’s Bay
+        - Sandringham
+        - Schnapper Rock
+        - Scorching Bay
+        - Seatoun
+        - Seatoun Heights
+        - Sefton
+        - Settlers Cove
+        - Shannon
+        - Shelly Bay
+        - Shelly Park
+        - Shirley
+        - Silkwood Heights
+        - Silverdale
+        - Silverstream
+        - Snells Beach
+        - Sockburn
+        - Somerfield
+        - Somerville
+        - South Brighton
+        - Southdown
+        - Southgate
+        - Southshore
+        - Spencerville
+        - Spreydon
+        - St Albans
+        - St Andrews
+        - St Martins
+        - Stanmore Bay
+        - Stewart Island
+        - Stoke
+        - Stokes Valley
+        - Stonefields
+        - Stratford
+        - Strathmore Park
+        - Strowan
+        - Sumner
+        - Sundale
+        - Sunnynook
+        - Sunnyvale
+        - Swanson
+        - Sydenham
+        - Taheke
+        - Taihape
+        - Taipa-Mangonui
+        - Tairua
+        - Taitville
+        - Tākaka
+        - Takanini
+        - Takapau
+        - Takapuna
+        - Takapuwahia
+        - Tamahere
+        - Tāmaki
+        - Tāneatua
+        - Tapanui
+        - Taradale
+        - Taumarunui
+        - Taupaki
+        - Taupō
+        - Taupo Bay
+        - Tauranga
+        - Tawa
+        - Te Anau
+        - Te Araroa
+        - Te Aro
+        - Te Aroha
+        - Te Atatū
+        - Te Atatū Peninsula
+        - Te Atatū South
+        - Te Awamutu
+        - Te Kaha
+        - Te Kainga
+        - Te Kao
+        - Te Karaka
+        - Te Kauwhata
+        - Te Kuiti
+        - Te Papapa
+        - Te Puia Springs
+        - Te Puke
+        - Te Rapa
+        - Templeton
+        - Temuka
+        - Thames
+        - The Gardens
+        - Thorndon
+        - Three Kings
+        - Tikitiki
+        - Timaru
+        - Tītahi Bay
+        - Titirangi
+        - Tokanui
+        - Tokomaru Bay
+        - Tokoroa
+        - Tolaga Bay
+        - Torbay
+        - Totara Heights
+        - Totara North
+        - Totara Vale
+        - Tuakau
+        - Tuatapere
+        - Tūrangi
+        - Tuscany Estate
+        - Twizel
+        - Unsworth Heights
+        - Upper Hutt
+        - Upper Moutere
+        - Upper Riccarton
+        - Urenui
+        - Vogeltown
+        - Wadestown
+        - Waiake
+        - Waiau Pa
+        - Waiheke Island
+        - Waihi
+        - Waihi Beach
+        - Waikanae
+        - Waikanae Beach
+        - Waikari
+        - Waikouaiti
+        - Waikowhai
+        - Waima
+        - Waimahia Landing
+        - Waimairi Beach
+        - Waimamaku
+        - Waimate
+        - Waimauku
+        - Wainoni
+        - Wainuiomata
+        - Waiouru
+        - Waipapa
+        - Waipawa
+        - Waipu
+        - Waipukurau
+        - Wairakei
+        - Wairau Valley
+        - Wairoa
+        - Waitakere
+        - Waitangirua
+        - Waitara
+        - Waitati
+        - Waitoki
+        - Waiuku
+        - Waiwera
+        - Wakefield
+        - Waltham
+        - Wanaka
+        - Warkworth
+        - Waterloo
+        - Waterview
+        - Wattle Cove
+        - Wattle Downs
+        - Waverley
+        - Wellington Central
+        - Wellsford
+        - Wesley
+        - Wesmorland
+        - West Harbour
+        - West Melton
+        - Western Springs
+        - Westfield
+        - Westgate
+        - Westhaven
+        - Westlake
+        - Westmere
+        - Westport
+        - Weymouth
+        - Whakatāne
+        - Whangamatā
+        - Whanganui
+        - Whangaparāoa Peninsula
+        - Whangārei
+        - Whangaroa
+        - Whataroa
+        - Whenuapai
+        - Whitby
+        - Whitford
+        - Whitianga
+        - Whitiora
+        - Wigram
+        - Wilton
+        - Windsor Park
+        - Winton
+        - Wiri
+        - Woodend
+        - Woodlands Park
+        - Woodridge
+        - Woodville
+        - Woolston
+        - Worser Bay
+        - Wyndham
+        - Yaldhurst
+    - name: latitude
+      in: query
+      description: Service-location latitude with a WGS84 datum.
+      schema:
+        type: number
+    - name: longitude
+      in: query
+      description: Service-location longitude with a WGS84 datum.
+      schema:
+        type: number
+    - name: radius
+      in: query
+      description: Service-location search boundary in km (default setting if not set is 20km).
+      schema:
+        type: number
+    - name: _format
+      in: query
+      description: Serialization format
+      x-consoleDefault: application/json
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+  /HealthcareService/{id}:
+    parameters:
+    - in: path
+      required: true
+      name: id
+      schema:
+        type: string
+    - name: _format
+      in: query
+      description: Serialization format
+      x-consoleDefault: application/json
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+    get:
+      tags:
+      - HealthcareService
+      responses:
+        403:
+          description: Access denied
+        200:
+          description: Success
+          content:
+            schema:
+              $ref: '#/components/schemas/HealthcareService'
+  /Location:
+    get:
+      tags:
+      - Location
+      responses:
+        403:
+          description: Access denied
+        200:
+          description: Success
+          content:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Location'
+      parameters:
+      - name: _id
+        in: query
+        description: The ID of the Location Resource
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Location name
+        schema:
+          type: string
+      - name: address
+        in: query
+        description: First line of address as it appears in Healthpoint. E.g. 171 Cameron Rd
+        schema:
+          type: string
+      - name: address-city
+        in: query
+        description: The town/city specified in an address, e.g. Ashburton
+        schema:
+          type: string
+      - name: address-postalcode
+        in: query
+        description: A postal code specified in an address
+        schema:
+          type: string
+      - name: _format
+        in: query
+        description: Serialization format
+        x-consoleDefault: application/json
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+  /Location/{id}:
+    parameters:
+    - in: path
+      required: true
+      name: id
+      schema:
+        type: string
+    get:
+      tags:
+      - Location
+  /Practitioner:
+    get:
+      tags:
+      - Practitioner
+      parameters:
+      - name: _id
+        in: query
+        description: The ID of the Practitioner resource
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text
+        schema:
+          type: string
+      - name: given
+        in: query
+        description: A portion of the given name
+        schema:
+          type: string
+      - name: family
+        in: query
+        description: A portion of the family name
+        schema:
+          type: string
+      - name: gender
+        in: query
+        description: Gender (General Practitioner and Dentistry only)
+        schema:
+          type: string
+          enum:
+          - male
+          - female
+          - other
+          - unknown
+      - name: _format
+        in: query
+        description: Serialization format
+        x-consoleDefault: application/json
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+      responses:
+        200:
+          description: Success
+          content:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Practitioner'
+  /Practitioner/{id}:
+    parameters:
+    - in: path
+      required: true
+      name: id
+      schema:
+        type: string
+    get:
+      tags:
+      - Practitioner
+      responses:
+        200:
+          description: Success
+          content:
+            schema:
+              $ref: '#/components/schemas/Practitioner'
+  /PractitionerRole:
+    get:
+      tags:
+      - PractitionerRole
+      parameters:
+      - name: _id
+        in: query
+        description: The ID of the Practitioner Role resource
+        schema:
+          type: string
+      - name: practitioner
+        in: query
+        description: The ID of the Practitioner resource
+        schema:
+          type: string
+      - name: _format
+        in: query
+        description: Serialization format
+        x-consoleDefault: application/json
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+      responses:
+        200:
+          description: Success
+          content:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/PractitionerRole'
+  /PractitionerRole/{id}:
+    parameters:
+    - in: path
+      required: true
+      name: id
+      schema:
+        type: string
+    get:
+      tags:
+      - PractitionerRole
+      responses:
+        200:
+          description: Success
+          content:
+            schema:
+              $ref: '#/components/schemas/PractitionerRole'
+components:
+  securitySchemes:
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    Bundle:
+      description: ""
+      type: object
+      properties:
+        resourceType:
+          type: string
+          minLength: 1
+        id:
+          type: string
+          minLength: 1
+        meta:
+          type: object
+          properties:
+            fhir_comments:
+              type: array
+              items:
+                properties: {}
+            lastUpdated:
+              type: string
+              minLength: 1
+          required:
+          - fhir_comments
+          - lastUpdated
+        type:
+          type: string
+          minLength: 1
+        total:
+          type: number
+        _total:
+          type: object
+          properties:
+            fhir_comments:
+              type: array
+              items:
+                properties: {}
+          required:
+          - fhir_comments
+        link:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+            - relation
+            - url
+            properties:
+              fhir_comments:
+                type: array
+                items:
+                  properties: {}
+              relation:
+                type: string
+                minLength: 1
+              url:
+                type: string
+                minLength: 1
+        entry:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+            - fullUrl
+            properties:
+              fhir_comments:
+                type: array
+                items:
+                  properties: {}
+              fullUrl:
+                type: string
+                minLength: 1
+              resource:
+                type: object
+                properties:
+                  resourceType:
+                    type: string
+                    minLength: 1
+                  id:
+                    type: string
+                    minLength: 1
+                  text:
+                    type: object
+                    properties:
+                      fhir_comments:
+                        type: array
+                        items:
+                          properties: {}
+                      status:
+                        type: string
+                        minLength: 1
+                      div:
+                        type: string
+                        minLength: 1
+                    required:
+                    - fhir_comments
+                    - status
+                    - div
+                  patient:
+                    type: object
+                    properties:
+                      reference:
+                        type: string
+                        minLength: 1
+                    required:
+                    - reference
+                  medicationReference:
+                    type: object
+                    properties:
+                      reference:
+                        type: string
+                        minLength: 1
+                    required:
+                    - reference
+                required:
+                - resourceType
+                - id
+                - text
+                - patient
+                - medicationReference
+              search:
+                type: object
+                properties:
+                  fhir_comments:
+                    type: array
+                    items:
+                      properties: {}
+                  mode:
+                    type: string
+                    minLength: 1
+                  _mode:
+                    type: object
+                    properties:
+                      fhir_comments:
+                        type: array
+                        items:
+                          properties: {}
+                    required:
+                    - fhir_comments
+                  score:
+                    type: number
+                  _score:
+                    type: object
+                    properties:
+                      fhir_comments:
+                        type: array
+                        items:
+                          properties: {}
+                    required:
+                    - fhir_comments
+                required:
+                - fhir_comments
+                - mode
+                - _mode
+                - score
+                - _score
+      required:
+      - resourceType
+      - id
+      - meta
+      - total
+      - _total
+      - link
+      - entry
+    HealthcareService:
+      description: ""
+      type: object
+      properties:
+        resourceType:
+          type: string
+          minLength: 1
+        id:
+          type: string
+          minLength: 1
+        text:
+          type: object
+          properties:
+            status:
+              type: string
+              minLength: 1
+            div:
+              type: string
+              minLength: 1
+          required:
+          - status
+          - div
+        contained:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+            - resourceType
+            - id
+            - description
+            - mode
+            properties:
+              resourceType:
+                type: string
+                minLength: 1
+              id:
+                type: string
+                minLength: 1
+              description:
+                type: string
+                minLength: 1
+              mode:
+                type: string
+                minLength: 1
+              physicalType:
+                type: object
+                properties:
+                  coding:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                      - code
+                      - display
+                      properties:
+                        code:
+                          type: string
+                          minLength: 1
+                        display:
+                          type: string
+                          minLength: 1
+                required:
+                - coding
+        serviceType:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            properties:
+              type:
+                type: object
+                properties:
+                  coding:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                      - system
+                      - code
+                      - display
+                      properties:
+                        system:
+                          type: string
+                          minLength: 1
+                        code:
+                          type: string
+                          minLength: 1
+                        display:
+                          type: string
+                          minLength: 1
+                required:
+                - coding
+              specialty:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  properties:
+                    coding:
+                      type: array
+                      uniqueItems: true
+                      minItems: 1
+                      items:
+                        required:
+                        - system
+                        - code
+                        - display
+                        properties:
+                          system:
+                            type: string
+                            minLength: 1
+                          code:
+                            type: string
+                            minLength: 1
+                          display:
+                            type: string
+                            minLength: 1
+        location:
+          type: object
+          properties:
+            reference:
+              type: string
+              minLength: 1
+          required:
+          - reference
+        serviceName:
+          type: string
+          minLength: 1
+        comment:
+          type: string
+          minLength: 1
+        extraDetails:
+          type: string
+          minLength: 1
+        telecom:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+            - system
+            - value
+            - use
+            properties:
+              system:
+                type: string
+                minLength: 1
+              value:
+                type: string
+                minLength: 1
+              use:
+                type: string
+                minLength: 1
+        coverageArea:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+            - reference
+            - display
+            properties:
+              reference:
+                type: string
+                minLength: 1
+              display:
+                type: string
+                minLength: 1
+        eligibility:
+          type: object
+          properties:
+            coding:
+              type: array
+              uniqueItems: true
+              minItems: 1
+              items:
+                required:
+                - display
+                properties:
+                  display:
+                    type: string
+                    minLength: 1
+          required:
+          - coding
+        eligibilityNote:
+          type: string
+          minLength: 1
+        characteristic:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            properties:
+              coding:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  required:
+                  - display
+                  properties:
+                    display:
+                      type: string
+                      minLength: 1
+        referralMethod:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            properties:
+              coding:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  required:
+                  - code
+                  - display
+                  properties:
+                    code:
+                      type: string
+                      minLength: 1
+                    display:
+                      type: string
+                      minLength: 1
+        publicKey:
+          type: string
+          minLength: 1
+        appointmentRequired:
+          type: boolean
+        availableTime:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+            - availableStartTime
+            - availableEndTime
+            properties:
+              daysOfWeek:
+                type: array
+                items:
+                  properties: {}
+              availableStartTime:
+                type: string
+                minLength: 1
+              availableEndTime:
+                type: string
+                minLength: 1
+        notAvailable:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+            - description
+            properties:
+              description:
+                type: string
+                minLength: 1
+              during:
+                type: object
+                properties:
+                  start:
+                    type: string
+                    minLength: 1
+                  end:
+                    type: string
+                    minLength: 1
+                required:
+                - start
+                - end
+        availabilityExceptions:
+          type: string
+          minLength: 1
+      required:
+      - resourceType
+      - id
+      - text
+      - contained
+      - serviceType
+      - location
+      - serviceName
+      - comment
+      - extraDetails
+      - telecom
+      - coverageArea
+      - eligibility
+      - eligibilityNote
+      - referralMethod
+      - publicKey
+      - appointmentRequired
+      - availableTime
+      - notAvailable
+      - availabilityExceptions
+    Location:
+      description: ""
+      type: object
+      properties:
+        resourceType:
+          type: string
+          minLength: 1
+        id:
+          type: string
+          minLength: 1
+        text:
+          type: object
+          properties:
+            status:
+              type: string
+              minLength: 1
+            div:
+              type: string
+              minLength: 1
+          required:
+          - status
+          - div
+        extension:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+            - url
+            - valueString
+            properties:
+              url:
+                type: string
+                minLength: 1
+              valueString:
+                type: string
+                minLength: 1
+        identifier:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+            - value
+            properties:
+              value:
+                type: string
+                minLength: 1
+        status:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+        description:
+          type: string
+          minLength: 1
+        mode:
+          type: string
+          minLength: 1
+        telecom:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+            - system
+            - value
+            - use
+            properties:
+              system:
+                type: string
+                minLength: 1
+              value:
+                type: string
+                minLength: 1
+              use:
+                type: string
+                minLength: 1
+        address:
+          type: object
+          properties:
+            use:
+              type: string
+              minLength: 1
+            line:
+              type: array
+              items:
+                properties: {}
+            city:
+              type: string
+              minLength: 1
+            postalCode:
+              type: string
+              minLength: 1
+            country:
+              type: string
+              minLength: 1
+          required:
+          - use
+          - line
+          - city
+          - postalCode
+          - country
+        physicalType:
+          type: object
+          properties:
+            coding:
+              type: array
+              uniqueItems: true
+              minItems: 1
+              items:
+                required:
+                - system
+                - code
+                - display
+                properties:
+                  system:
+                    type: string
+                    minLength: 1
+                  code:
+                    type: string
+                    minLength: 1
+                  display:
+                    type: string
+                    minLength: 1
+          required:
+          - coding
+        position:
+          type: object
+          properties:
+            longitude:
+              type: number
+            latitude:
+              type: number
+            altitude:
+              type: number
+          required:
+          - longitude
+          - latitude
+          - altitude
+        managingOrganization:
+          type: object
+          properties:
+            reference:
+              type: string
+              minLength: 1
+          required:
+          - reference
+      required:
+      - resourceType
+      - id
+      - text
+      - extension
+      - status
+      - name
+      - description
+      - mode
+      - telecom
+      - address
+      - physicalType
+      - position
+      - managingOrganization
+    Practitioner:
+      description: ""
+      type: object
+      properties:
+        resourceType:
+          type: string
+          minLength: 1
+        id:
+          type: string
+          minLength: 1
+        text:
+          type: object
+          properties:
+            status:
+              type: string
+              minLength: 1
+            div:
+              type: string
+              minLength: 1
+          required:
+          - status
+          - div
+        identifier:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+            - system
+            - value
+            properties:
+              system:
+                type: string
+                minLength: 1
+              value:
+                type: string
+                minLength: 1
+        name:
+          type: object
+          properties:
+            family:
+              type: array
+              items:
+                properties: {}
+            given:
+              type: array
+              items:
+                properties: {}
+            prefix:
+              type: array
+              items:
+                properties: {}
+          required:
+          - family
+          - given
+          - prefix
+        practitionerRole:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            properties:
+              managingOrganization:
+                type: object
+                properties:
+                  reference:
+                    type: string
+                    minLength: 1
+                required:
+                - reference
+              role:
+                type: object
+                properties:
+                  fhir_comments:
+                    type: array
+                    items:
+                      properties: {}
+                  coding:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                      - system
+                      - code
+                      properties:
+                        system:
+                          type: string
+                          minLength: 1
+                        code:
+                          type: string
+                          minLength: 1
+                required:
+                - fhir_comments
+                - coding
+              period:
+                type: object
+                properties:
+                  start:
+                    type: string
+                    minLength: 1
+                  end:
+                    type: string
+                    minLength: 1
+                required:
+                - start
+                - end
+              location:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  required:
+                  - reference
+                  - display
+                  properties:
+                    reference:
+                      type: string
+                      minLength: 1
+                    display:
+                      type: string
+                      minLength: 1
+              healthcareService:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  required:
+                  - reference
+                  properties:
+                    reference:
+                      type: string
+                      minLength: 1
+        qualification:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            properties:
+              identifier:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  required:
+                  - system
+                  - value
+                  properties:
+                    system:
+                      type: string
+                      minLength: 1
+                    value:
+                      type: string
+                      minLength: 1
+              code:
+                type: object
+                properties:
+                  text:
+                    type: string
+                    minLength: 1
+                required:
+                - text
+              period:
+                type: object
+                properties:
+                  start:
+                    type: string
+                    minLength: 1
+                required:
+                - start
+              issuer:
+                type: object
+                properties:
+                  display:
+                    type: string
+                    minLength: 1
+                required:
+                - display
+      required:
+      - resourceType
+      - id
+      - text
+      - name
+      - practitionerRole
+      - qualification
+    PractitionerRole: {}
+    Organization:
+      description: ""
+      type: object
+      properties:
+        resourceType:
+          type: string
+          minLength: 1
+        id:
+          type: string
+          minLength: 1
+        text:
+          type: object
+          properties:
+            status:
+              type: string
+              minLength: 1
+            div:
+              type: string
+              minLength: 1
+          required:
+          - status
+          - div
+        extension:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+            - url
+            - valueString
+            properties:
+              fhir_comments:
+                type: array
+                items:
+                  properties: {}
+              url:
+                type: string
+                minLength: 1
+              valueString:
+                type: string
+                minLength: 1
+        name:
+          type: string
+          minLength: 1
+        telecom:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+            - system
+            - value
+            properties:
+              system:
+                type: string
+                minLength: 1
+              value:
+                type: string
+                minLength: 1
+        address:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+            - city
+            - state
+            - postalCode
+            - country
+            properties:
+              line:
+                type: array
+                items:
+                  properties: {}
+              city:
+                type: string
+                minLength: 1
+              state:
+                type: string
+                minLength: 1
+              postalCode:
+                type: string
+                minLength: 1
+              country:
+                type: string
+                minLength: 1
+      required:
+      - resourceType
+      - id
+      - text
+      - extension
+      - name
+      - telecom
+      - address
