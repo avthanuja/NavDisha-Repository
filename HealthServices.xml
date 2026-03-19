@@ -1,0 +1,645 @@
+<HealthcareService xmlns="http://hl7.org/fhir">
+   <id value="hp-service-12345"/>
+   <meta>
+      <versionId value="2"/>
+      <lastUpdated value="2021-03-18T14:07:17.158+00:00"/>
+   </meta>
+   <extension url="http://www.healthpoint.co.nz/">
+      <extension url="healthpoint-id">
+         <valueString value="12345"/>
+      </extension>
+      <extension url="healthpoint-service-type">
+         <valueString value="Primary Healthcare Service"/>
+      </extension>
+      <extension url="website">
+         <valueString value="www.westdoctorz.co.nz"/>
+      </extension>
+      <extension url="last-updated">
+         <valueString value="2021-03-17T15:34:48+12:00"/>
+      </extension>
+      <extension url="document-downloads">
+         <valueAttachment>
+            <url value="https://www.healthpoint.co.nz/assets/aa/rhlfflmxgx.pdf?k=08ba205832"/>
+            <title value="Directions to West Doctorz"/>
+         </valueAttachment>
+      </extension>
+      <extension url="how-do-i-access">
+         <extension url="access-type">
+            <valueString value="Make an appointment"/>
+         </extension>
+         <extension url="access-description">
+            <valueString value="&lt;p>Please phone for an appointment. We do not take walk in patients.&amp;nbsp;&lt;/p>null"/>
+         </extension>
+      </extension>
+      <extension url="healthlink-edi">
+         <valueString value="westdrz"/>
+      </extension>
+      <extension url="region">
+         <valueString value="Central Auckland"/>
+      </extension>
+      <extension url="dhb-region">
+         <valueString value="Central Auckland"/>
+      </extension>
+      <extension url="services-provided">
+         <extension url="services-url">
+            <valueString value="https://www.healthpoint.co.nz/gps-accident-urgent-medical-care/gp/west-doctorz/?solo=treatments&amp;index=0"/>
+         </extension>
+         <extension url="services-name">
+            <valueString value="Adult and Child Medical Care"/>
+         </extension>
+         <extension url="services-provided-type">
+            <valueString value="Adult and Child Medical Care"/>
+         </extension>
+         <extension url="services-description">
+            <valueString value="&lt;p>Your GP's surgery is far more than a place to go when you are feeling unwell and needing a quick cure. The doctor who sees you has gone through an extensive medical training to equip her or him to help children and adults of all ages with a range of physical and emotional difficulties. GPs are at the centre of the healthcare hub and will be aware of services and expertise that&amp;nbsp;are available locally and further-a-field. GPs are also aware of the link that stress and unhappy life events have on physical health so know when to suggest a talking therapy rather than medication.&lt;/p>"/>
+         </extension>
+      </extension>
+      <extension url="services-provided">
+         <extension url="services-url">
+            <valueString value="https://www.healthpoint.co.nz/gps-accident-urgent-medical-care/gp/west-doctorz/?solo=treatments&amp;index=1"/>
+         </extension>
+         <extension url="services-name">
+            <valueString value="Minor Accident Care"/>
+         </extension>
+         <extension url="services-provided-type">
+            <valueString value="Minor Accident Care"/>
+         </extension>
+         <extension url="services-description">
+            <valueString value="&lt;p>Primary care practices offer a range of services and are able to deal with most minor accident care. If they are not able to deal with an injury they will refer on to the appropriate service.&lt;/p>"/>
+         </extension>
+      </extension>
+      <extension url="services-provided">
+         <extension url="services-url">
+            <valueString value="https://www.healthpoint.co.nz/gps-accident-urgent-medical-care/gp/west-doctorz/?solo=treatments&amp;index=2"/>
+         </extension>
+         <extension url="services-name">
+            <valueString value="Minor Surgery"/>
+         </extension>
+         <extension url="services-provided-type">
+            <valueString value="Minor Surgery"/>
+         </extension>         
+         <extension url="services-description">
+            <valueString value="&lt;p>Minor surgery is commonly provided in primary care practices, providing fast, competent removal and biopsies of skin lesions. Other services include cosmetic work such as removal of benign moles and skin tags. Ingrown toenail surgery is also commonly provided.&amp;nbsp;&lt;br />These conditions do not need to be referred to a hospital, perhaps saving you a long wait or a cancelled appointment when a more serious case takes priority.&amp;nbsp;&lt;br />If your doctor is unable to provide the&amp;nbsp;procedure you need, he/she may know a neighbouring GP who does. Otherwise, the PHO will have a list of GPs trained in particular operations.&lt;/p>"/>
+         </extension>
+      </extension>
+      <extension url="services-provided">
+         <extension url="services-url">
+            <valueString value="https://www.healthpoint.co.nz/gps-accident-urgent-medical-care/gp/west-doctorz/?solo=treatments&amp;index=3"/>
+         </extension>
+         <extension url="services-name">
+            <valueString value="Repeat Prescriptions"/>
+         </extension>
+         <extension url="services-provided-type">
+            <valueString value="Repeat Prescriptions"/>
+         </extension>         
+         <extension url="services-description">
+            <valueString value="&lt;p>Each GP surgery or primary care&amp;nbsp;practice will have its own procedure for repeat prescribing but the following rules are common to most, if not all. Patients who are well-known&amp;nbsp;to the practice&amp;nbsp;who have&amp;nbsp;a stable condition like asthma, hypertension or diabetes could be allowed to get a repeat prescription for up to six months. Repeat prescriptions are never given to patients who are not known to the practice and there is probably a blanket ban on repeats for narcotics and other drugs that could be misused as doctors are expected to monitor these drugs carefully.&lt;/p>"/>
+         </extension>
+      </extension>
+      <extension url="services-provided">
+         <extension url="services-url">
+            <valueString value="https://www.healthpoint.co.nz/gps-accident-urgent-medical-care/gp/west-doctorz/?solo=treatments&amp;index=4"/>
+         </extension>
+         <extension url="services-name">
+            <valueString value="Lab Results"/>
+         </extension>
+         <extension url="services-provided-type">
+            <valueString value="Lab Results"/>
+         </extension>         
+         <extension url="services-description">
+            <valueString value="&lt;p>Sometimes your doctor needs to take a sample of blood or urine either to discover what is wrong with you or to measure something in your blood so that the right medication is given to you. These tests could be anything from blood sugar to a full blood count or a sample of tissue to test for cancer.&lt;/p>&#xa;&lt;p>While urine can generally be tested in the surgery, blood and other specimens are usually sent away for testing at a laboratory. Most results come back within 48 hours unless a very rare test is needed which has to go to a specialist lab further away when it might take a little longer.&lt;/p>"/>
+         </extension>
+      </extension>
+      <extension url="services-provided">
+         <extension url="services-url">
+            <valueString value="https://www.healthpoint.co.nz/gps-accident-urgent-medical-care/gp/west-doctorz/?solo=treatments&amp;index=5"/>
+         </extension>
+         <extension url="services-name">
+            <valueString value="Liquid Nitrogen"/>
+         </extension>
+         <extension url="services-provided-type">
+            <valueString value="Liquid Nitrogen"/>
+         </extension>         
+         <extension url="services-description">
+            <valueString value="&lt;p>Liquid nitrogen is a fast, effective treatment provided in many practices to treat viral warts, sun damaged skin, skin tags and many benign cosmetic lesions.&amp;nbsp;It comes in a container with a nozzle&amp;nbsp;and is usually applied by swab or spray. Often one treatment is all that is needed but sometimes it may need repeating after two weeks.&lt;br />Because it cannot be stored for too long, you will often find that your GP will treat a number of patients one after the other.&amp;nbsp;&lt;/p>&#xa;&lt;p>For more information &lt;a href=&quot;http://www.dermnetnz.org/procedures/cryotherapy.html&quot;>click here&lt;/a>.&lt;/p>"/>
+         </extension>
+      </extension>
+      <extension url="services-provided">
+         <extension url="services-url">
+            <valueString value="https://www.healthpoint.co.nz/gps-accident-urgent-medical-care/gp/west-doctorz/?solo=treatments&amp;index=6"/>
+         </extension>
+         <extension url="services-name">
+            <valueString value="Immunisation"/>
+         </extension>
+         <extension url="services-provided-type">
+            <valueString value="Immunisation"/>
+         </extension>         
+         <extension url="services-description">
+            <valueString value="&lt;p>Immunisations are provided at all primary care practices and are one of the most important services they provide. Immunisation has led to the decline of many lethal diseases including meningococcal B meningitis.&lt;/p>&#xa;&lt;p>The National Immunisation Schedule offers a series of vaccines free to babies, children, adolescents and adults. Visit the Ministry of Health website &lt;a href=&quot;http://www.health.govt.nz/our-work/preventative-health-wellness/immunisation/new-zealand-immunisation-schedule&quot;>http://www.health.govt.nz/our-work/preventative-health-wellness/immunisation/new-zealand-immunisation-schedule&lt;/a> to find out what vaccines are on the Schedule and when they are given.&amp;nbsp; Additional vaccines are provided free for certain eligible groups considered to be at high risk because of other medical conditions; find out more here &lt;a href=&quot;http://www.health.govt.nz/our-work/preventative-health-wellness/immunisation/new-zealand-immunisation-schedule&quot;>http://www.health.govt.nz/our-work/preventative-health-wellness/immunisation/new-zealand-immunisation-schedule&lt;/a>. These and other vaccines such as travel vaccines can be purchased by other people if they want them.&lt;/p>&#xa;&lt;p>Immunisations are given by a practice nurse or doctor, having ensured beforehand that the person is not ill or suffering from allergies. Risks associated with immunisation are very rare.&lt;/p>&#xa;&lt;p>Children have their own document to keep a record of these injections. Under the age of 5 this is usually their Well Child/Tamariki Ora My Health Book. The immunisation record may need to be shown, for example, when starting school or early childcare. The staff will also record the immunisation details on New Zealand&amp;rsquo;s National Immunisation Register. This computerised information system holds details of all immunisations given to children here and will alert families when immunisations are due.&lt;/p>"/>
+         </extension>
+      </extension>
+      <extension url="services-provided">
+         <extension url="services-url">
+            <valueString value="https://www.healthpoint.co.nz/gps-accident-urgent-medical-care/gp/west-doctorz/?solo=treatments&amp;index=7"/>
+         </extension>
+         <extension url="services-name">
+            <valueString value="Cervical Screening"/>
+         </extension>
+         <extension url="services-provided-type">
+            <valueString value="Cervical Screening"/>
+         </extension>         
+         <extension url="services-description">
+            <valueString value="&lt;p>All women who have ever been sexually active should have regular cervical smear tests every three years between the ages of 20 and 70. This includes women who have been immunised against HPV. This test detects abnormal cells which, if left untreated, could become cervical cancer. Very often these cells are made abnormal by a human papillomavirus (HPV) which is a sexually transmitted virus. Regular tests and treatment reduces the likelihood of this sort of cancer by around 90%.&amp;nbsp;&lt;br />&lt;br />For more information about cervical smear tests click on the link to the National Screening Unit website &lt;a href=&quot;http://www.nsu.govt.nz/current-nsu-programmes/national-cervical-screening-programme.aspx&quot;>http://www.nsu.govt.nz/current-nsu-programmes/national-cervical-screening-programme.aspx &lt;/a>&lt;/p>"/>
+         </extension>
+      </extension>
+      <extension url="services-provided">
+         <extension url="services-url">
+            <valueString value="https://www.healthpoint.co.nz/gps-accident-urgent-medical-care/gp/west-doctorz/?solo=treatments&amp;index=8"/>
+         </extension>
+         <extension url="services-name">
+            <valueString value="ECG"/>
+         </extension>
+         <extension url="services-provided-type">
+            <valueString value="ECG"/>
+         </extension>         
+         <extension url="services-description">
+            <valueString value="&lt;p>An ECG is a recording of your heart's electrical activity. Electrode patches are attached to your skin to measure the electrical impulses given off by your heart. The result is a trace that can be read by a doctor. It can give information of previous heart attacks or problems with the heart rhythm.&lt;/p>"/>
+         </extension>
+      </extension>
+      <extension url="services-provided">
+         <extension url="services-url">
+            <valueString value="https://www.healthpoint.co.nz/gps-accident-urgent-medical-care/gp/west-doctorz/?solo=treatments&amp;index=9"/>
+         </extension>
+         <extension url="services-name">
+            <valueString value="Travel Advice / Immunisations"/>
+         </extension>
+         <extension url="services-provided-type">
+            <valueString value="Travel Advice / Immunisations"/>
+         </extension>         
+         <extension url="services-description">
+            <valueString value="&lt;p>Another service offered to you at your GP surgery (primary care practice) is advice and immunisation before you go to another country. While you are likely to have the immunisations needed to live in New Zealand, there may be other injections you need to protect yourself before going for example to Africa or South America. In some places you will need protection from rabies or malaria. Yellow fever vaccinations are only available at approved centres; please &lt;a href=&quot;http://www.arphs.govt.nz/health-information/communicable-disease/yellow-fever&quot; target=&quot;_blank&quot;>click here&lt;/a> to view the centres in the Auckland region. Your doctor will be able to tell you what diseases you will need to be protected from in any named country and advise you on other medical matters.&amp;nbsp;&lt;/p>"/>
+         </extension>
+      </extension>
+      <extension url="services-provided">
+         <extension url="services-url">
+            <valueString value="https://www.healthpoint.co.nz/gps-accident-urgent-medical-care/gp/west-doctorz/?solo=treatments&amp;index=10"/>
+         </extension>
+         <extension url="services-name">
+            <valueString value="Well Child/Tamariki Ora Health Checks – Birth to Three Years"/>
+         </extension>
+         <extension url="services-provided-type">
+            <valueString value="Well Child/Tamariki Ora Health Checks – Birth to Three Years"/>
+         </extension>         
+         <extension url="services-description">
+            <valueString value="&lt;p>All New Zealand children are entitled to 11 free health checks from birth to three years. The checks aim to ensure that children are growing and developing as well as possible. Included in the checks are clinical assessment, health education and family/whanau support.&lt;/p>&#xa;&lt;p>Baby checks are at birth and then at 24 hours, five days and around 2-4 weeks. Babies are weighed and measured to ensure that they are developing correctly. These sessions provide a great opportunity for parents to ask questions from an expert and have any problem addressed; difficulties with breastfeeding or sleep for example. They can also be used to discuss immunisations and vaccinations. These checks will be carried out by your lead maternity carer (LMC).&lt;/p>&#xa;&lt;p>Between the ages of 4-6 weeks and three years, there are seven core health checks available,&amp;nbsp;typically these are around 4-6 weeks, 8-10 weeks, 3-4 months, 5-7 months, 9-12 months, 15-18 months and 2-3 years. These checks may be carried out by a Well Child Provider of your choice e.g. Plunket, Maori health provider, community nurse, a general practice team (doctor and practice nurse). Your LMC will be able to give you a list of Well Child Providers in your area.&lt;/p>&#xa;&lt;p>More information about Well Child services is available on the &lt;a href=&quot;http://www.health.govt.nz/yourhealth-topics/children/well-child-tamariki-ora&quot; target=&quot;_blank&quot;>Ministry of Health website&lt;/a>.&lt;br />&amp;nbsp;&lt;/p>"/>
+         </extension>
+      </extension>
+      <extension url="services-provided">
+         <extension url="services-url">
+            <valueString value="https://www.healthpoint.co.nz/gps-accident-urgent-medical-care/gp/west-doctorz/?solo=treatments&amp;index=11"/>
+         </extension>
+         <extension url="services-name">
+            <valueString value="Patient Portal"/>
+         </extension>
+         <extension url="services-provided-type">
+            <valueString value="Patient Portal"/>
+         </extension>         
+         <extension url="services-description">
+            <valueString value="&lt;p>A patient portal is a secure online tool provided by GP practices that can allow convenient access to your health information as well as interaction with the practice e.g. booking appointments and requesting repeat prescriptions.&lt;/p>"/>
+         </extension>
+      </extension>
+      <extension url="age-groups">
+         <valueString value="Child / tamariki"/>
+      </extension>
+      <extension url="age-groups">
+         <valueString value="Youth / rangatahi"/>
+      </extension>
+      <extension url="age-groups">
+         <valueString value="Adult / pakeke"/>
+      </extension>
+      <extension url="age-groups">
+         <valueString value="Older adult / kaumātua"/>
+      </extension>  
+      <extension url="wheelchair-access">
+         <valueString value="Yes"/>
+      </extension>    
+      <extension url="fees">
+         <extension url="fee-comment">
+            <valueString value="&lt;p>Non-enrolled Patient Fee: $90.00&lt;/p>"/>
+         </extension>
+         <extension url="fee-line">
+            <extension url="age-range">
+               <valueString value="Under 14 years"/>
+            </extension>
+            <extension url="fee">
+               <valueString value="FREE"/>
+            </extension>
+         </extension>
+         <extension url="fee-line">
+            <extension url="age-range">
+               <valueString value="14-17 years"/>
+            </extension>
+            <extension url="fee">
+               <valueString value="$42"/>
+            </extension>
+         </extension>
+         <extension url="fee-line">
+            <extension url="age-range">
+               <valueString value="18-24 years"/>
+            </extension>
+            <extension url="fee">
+               <valueString value="$44"/>
+            </extension>
+         </extension>
+         <extension url="fee-line">
+            <extension url="age-range">
+               <valueString value="25-44 years"/>
+            </extension>
+            <extension url="fee">
+               <valueString value="$49"/>
+            </extension>
+         </extension>
+         <extension url="fee-line">
+            <extension url="age-range">
+               <valueString value="45-64 years"/>
+            </extension>
+            <extension url="fee">
+               <valueString value="$49"/>
+            </extension>
+         </extension>
+         <extension url="fee-line">
+            <extension url="age-range">
+               <valueString value="65+ years"/>
+            </extension>
+            <extension url="fee">
+               <valueString value="$44"/>
+            </extension>
+         </extension>
+      </extension>
+      <extension url="parking">
+         <valueString value="&lt;p>Two hour on street parking available.&lt;/p>"/>
+      </extension>
+      <extension url="hours-description">
+         <valueString value="&lt;p>For out of hours assistance ring (09) 555 5555 and a nurse will direct you to the appropriate service.&lt;/p>"/>
+      </extension>
+      <extension url="preferred-acc-ooh">
+         <valueString value="WestEnd Urgent Care"/>
+      </extension>
+      <extension url="update-date">
+         <valueString value="2021-03-17T15:34:48+12:00"/>
+      </extension>
+      <extension url="additional-contact-details">
+         <valueString value="&lt;p>&lt;Call us for repeat prescriptions&lt;/p>"/>
+      </extension>
+      <extension url="branch">
+         <valueString value="GPs / Accident &amp; Urgent Medical Care"/>
+      </extension>
+      <extension url="branch-code">
+         <valueString value="primary"/>
+      </extension>
+      <extension url="hp-services-url">
+         <valueString value="https://www.healthpoint.co.nz/gps-accident-urgent-medical-care/gp/west-doctorz/"/>
+      </extension>
+      <extension url="public-transport">
+         <valueString value="&lt;p>The <a href=\"https://at.govt.nz/journey-planner/\" target=\"_blank\">Auckland Transport Journey Planner</a> will help you to plan your journey.&lt;/p>"/>
+      </extension>
+      <extension url="travel-directions">
+         <valueString value="&lt;p>Motorway access from the Northern motorway can be either Gillies or Port exits. South Western Motorway, exit at Newton Road.&lt;/p>"/>
+      </extension>
+      <extension url="staff">
+         <valueString value="&lt;p>Our staff include 2 GPs, both vocationally registered and 2 practices nurses.&lt;/p>"/>
+      </extension>
+      <extension url="booking-url">
+         <valueString value="http://www.connectmed.co.nz/practice/west-doctorz"/>
+      </extension>
+      <extension url="age-groups">
+         <valueString value="Child / tamariki"/>
+      </extension>
+      <extension url="age-groups">
+         <valueString value="Youth / rangatahi"/>
+      </extension>
+      <extension url="age-groups">
+         <valueString value="Adult / pakeke"/>
+      </extension>
+      <extension url="age-groups">
+         <valueString value="Older adult / kaumātua"/>
+      </extension> 
+      <extension url="service-location">
+         <extension url="https://standards.digital.health.nz/id/hpi-facility">
+            <valueString value="F12345-A" /> 
+         </extension>
+         <extension url="location">
+            <valueReference>
+               <reference value="hp-location-98765"/>
+               <type value="Location"/>
+               <display value="23 Edwin Street, Mount Eden, Auckland"/>
+            </valueReference>
+         </extension>
+         <extension url="street-address">
+            <valueAddress>
+               <use value="work"/>
+               <type value="physical"/>
+               <line value="23 Edwin Street&#xa;Mt Eden&#xa;Auckland 1024"/>
+               <city value="Auckland"/>
+               <district value="Auckland"/>
+               <postalCode value="1024"/>
+               <country value="New Zealand"/>
+            </valueAddress>
+         </extension>
+         <extension url="postal-address">
+            <valueAddress>
+               <use value="work"/>
+               <type value="postal"/>
+               <line value="23 Edwin Street Mt Eden Auckland 1024 "/>
+            </valueAddress>
+         </extension>
+         <extension url="email">
+            <valueContactPoint>
+               <system value="email"/>
+               <value value="info@westdoctorz.co.nz"/>
+            </valueContactPoint>
+         </extension>
+         <extension url="phone">
+            <valueContactPoint>
+               <system value="phone"/>
+               <value value="(09) 555 5555"/>
+            </valueContactPoint>
+         </extension>
+         <extension url="mobile">
+            <valueContactPoint>
+               <system value="sms"/>
+               <value value="021 555 5555"/>
+            </valueContactPoint>
+         </extension>
+          <extension url="fax">
+            <valueContactPoint>
+               <system value="fax"/>
+               <value value="(09) 555 5556"/>
+            </valueContactPoint>
+         </extension>
+         <extension url="coordinates">
+            <extension url="latitude">
+               <valueDecimal value="-36.8707119"/>
+            </extension>
+            <extension url="longitude">
+               <valueDecimal value="174.7600365"/>
+            </extension>
+         </extension>
+         <extension url="subregion">
+            <valueString value="Mount Eden "/>
+         </extension>
+         <extension url="hp-location-url">
+            <valueString value="https://www.healthpoint.co.nz/23-edwin-street-mount-eden-auckland/"/>
+         </extension>
+      </extension>
+      <extension url="people-list">
+         <extension url="person">
+            <valueReference>
+               <reference value="hp-prac-1234"/>
+               <type value="Practitioner"/>
+               <display value="Dr Meredith Grey"/>
+            </valueReference>
+         </extension>
+         <extension url="person-type">
+            <valueString value="General Practitioner"/>
+         </extension>
+         <extension url="person-photo">
+            <valueAttachment>
+               <contentType value="image/png"/>
+               <url value="https://www.healthpoint.co.nz/static/hp3/img/person-placeholder.png?k=68112efab0%22%3E"/>
+               <size value="42402"/>
+            </valueAttachment>
+         </extension>
+         <extension url="person-title">
+            <valueString value="General Practitioner - Vocationally Registered"/>
+         </extension>
+         <extension url="person-page">
+            <valueString value="https://www.healthpoint.co.nz/gps-accident-urgent-medical-care/general-practitioner/dr-meredith-grey/"/>
+         </extension>
+      </extension>
+      <extension url="people-list">
+         <extension url="person">
+            <valueReference>
+               <reference value="hp-prac-12345"/>
+               <type value="Practitioner"/>
+               <display value="Dr Doug Ross"/>
+            </valueReference>
+         </extension>
+         <extension url="person-type">
+            <valueString value="General Practitioner"/>
+         </extension>
+         <extension url="person-photo">
+            <valueAttachment>
+               <contentType value="image/png"/>
+               <url value="https://www.healthpoint.co.nz/static/hp3/img/person-placeholder.png?k=68112efab0%22%3E"/>
+               <size value="42402"/>
+            </valueAttachment>
+         </extension>
+         <extension url="person-title">
+            <valueString value="General Practitioner - Vocationally Registered"/>
+         </extension>
+         <extension url="person-page">
+            <valueString value="https://www.healthpoint.co.nz/gps-accident-urgent-medical-care/general-practitioner/dr-doug-ross/"/>
+         </extension>     
+      </extension>
+   </extension>
+   <extension url="http://hl7.org.nz/fhir/StructureDefinition/pho">
+      <valueCodeableConcept>
+         <coding>
+            <system value="https://standards.digital.health.nz/ns/pho-code"/>
+            <code value="G12345-A"/>
+            <display value="West PHO"/>
+         </coding>
+      </valueCodeableConcept>
+   </extension>
+   <extension url="http://hl7.co.nz/fhir/StructureDefinition/funded-programme">
+      <extension url="programmeType">
+         <valueString value="enrollment"/>
+      </extension>
+      <extension url="currentAvailability">
+         <valueString value="No"/>
+      </extension>
+      <extension url="notes">
+         <valueString value="&lt;p>We are currently unable to enroll new patients as our books are full. Please phone the practice to join our waitlist.&lt;/p>"/>
+      </extension>
+   </extension>
+   <identifier>
+      <system value="https://standards.digital.health.nz/id/hpi-org" /> 
+      <value value="G12345-A" /> 
+   </identifier>
+   <location id="hp-location-98765">
+      <reference value="Location/hp-location-98765"/>
+      <type value="Location"/>
+      <display value="23 Edwin Street, Mount Eden, Auckland"/>
+   </location>
+   <active value="true"/>
+   <name value="West Doctorz"/>
+   <comment value="&lt;p>We are a family centred surgery offering a full range of general practice services to you and your family.&lt;/p>"/>
+   <photo>
+      <contentType value="image/png"/>
+      <url value="https://www.healthpoint.co.nz/assets/sm/upload/n4/sy/kv/nv/Beach.jpg?k=116197b2b7"/>
+      <size value="36200"/>
+   </photo>
+   <telecom>
+      <system value="email"/>
+      <value value="reception@westdoctorz.co.nz"/>
+   </telecom>
+   <telecom>
+      <system value="phone"/>
+      <value value="(09) 555 5555"/>
+   </telecom>
+   <telecom>
+      <system value="sms"/>
+      <value value="021 555 5555"/>
+   </telecom>
+   <telecom>
+      <system value="fax"/>
+      <value value="(09) 555 5556"/>
+   </telecom>
+   <communication>
+      <coding>
+         <system value="urn:ietf:bcp:47"/>
+         <code value="en"/>
+         <display value="English"/>
+      </coding>
+   </communication>
+   <availableTime>
+      <daysOfWeek value="mon"/>
+      <availableStartTime value="08:30"/>
+      <availableEndTime value="18:00"/>
+   </availableTime>
+   <availableTime>
+      <daysOfWeek value="tue"/>
+      <availableStartTime value="08:30"/>
+      <availableEndTime value="18:00"/>
+   </availableTime>
+   <availableTime>
+      <daysOfWeek value="wed"/>
+      <availableStartTime value="08:30"/>
+      <availableEndTime value="18:00"/>
+   </availableTime>
+   <availableTime>
+      <daysOfWeek value="thu"/>
+      <availableStartTime value="08:30"/>
+      <availableEndTime value="18:00"/>
+   </availableTime>
+   <availableTime>
+      <daysOfWeek value="fri"/>
+      <availableStartTime value="08:30"/>
+      <availableEndTime value="17:00"/>
+   </availableTime>
+   <notAvailable>
+      <during>
+         <start value="2018-12-30T00:00:00+00:00"/>
+         <end value="2018-12-30T00:00:00+00:00"/>
+      </during>
+   </notAvailable>
+   <notAvailable>
+      <description value="Easter Sunday"/>
+      <during>
+         <start value="2019-04-21T00:00:00+00:00"/>
+         <end value="2019-04-21T00:00:00+00:00"/>
+      </during>
+   </notAvailable>
+   <notAvailable>
+      <description value="Christmas Day"/>
+      <during>
+         <start value="2019-12-25T00:00:00+00:00"/>
+         <end value="2019-12-25T00:00:00+00:00"/>
+      </during>
+   </notAvailable>
+   <notAvailable>
+      <description value="Boxing Day"/>
+      <during>
+         <start value="2019-12-26T00:00:00+00:00"/>
+         <end value="2019-12-26T00:00:00+00:00"/>
+      </during>
+   </notAvailable>
+   <notAvailable>
+      <description value="Labour Day"/>
+      <during>
+         <start value="2019-10-28T00:00:00+00:00"/>
+         <end value="2019-10-28T00:00:00+00:00"/>
+      </during>
+   </notAvailable>
+   <notAvailable>
+      <during>
+         <start value="2018-12-28T00:00:00+00:00"/>
+         <end value="2018-12-28T00:00:00+00:00"/>
+      </during>
+   </notAvailable>
+   <notAvailable>
+      <during>
+         <start value="2018-12-31T00:00:00+00:00"/>
+         <end value="2018-12-31T00:00:00+00:00"/>
+      </during>
+   </notAvailable>
+   <notAvailable>
+      <during>
+         <start value="2018-12-29T00:00:00+00:00"/>
+         <end value="2018-12-29T00:00:00+00:00"/>
+      </during>
+   </notAvailable>
+   <notAvailable>
+      <description value="ANZAC Day"/>
+      <during>
+         <start value="2020-04-27T00:00:00+00:00"/>
+         <end value="2020-04-27T00:00:00+00:00"/>
+      </during>
+   </notAvailable>
+   <notAvailable>
+      <description value="Queen's Birthday"/>
+      <during>
+         <start value="2019-06-03T00:00:00+00:00"/>
+         <end value="2019-06-03T00:00:00+00:00"/>
+      </during>
+   </notAvailable>
+   <notAvailable>
+      <description value="Easter Monday"/>
+      <during>
+         <start value="2020-04-13T00:00:00+00:00"/>
+         <end value="2020-04-13T00:00:00+00:00"/>
+      </during>
+   </notAvailable>
+   <notAvailable>
+      <description value="Auckland Anniversary"/>
+      <during>
+         <start value="2020-01-27T00:00:00+00:00"/>
+         <end value="2020-01-27T00:00:00+00:00"/>
+      </during>
+   </notAvailable>
+   <notAvailable>
+      <description value="Waitangi Day"/>
+      <during>
+         <start value="2020-02-06T00:00:00+00:00"/>
+         <end value="2020-02-06T00:00:00+00:00"/>
+      </during>
+   </notAvailable>
+   <notAvailable>
+      <description value="Good Friday"/>
+      <during>
+         <start value="2020-04-10T00:00:00+00:00"/>
+         <end value="2020-04-10T00:00:00+00:00"/>
+      </during>
+   </notAvailable>
+   <notAvailable>
+      <during>
+         <start value="2018-12-27T00:00:00+00:00"/>
+         <end value="2018-12-27T00:00:00+00:00"/>
+      </during>
+   </notAvailable>
+   <notAvailable>
+      <description value="New Years Day"/>
+      <during>
+         <start value="2020-01-01T00:00:00+00:00"/>
+         <end value="2020-01-01T00:00:00+00:00"/>
+      </during>
+   </notAvailable>
+   <notAvailable>
+      <description value="Day after New Year's Day"/>
+      <during>
+         <start value="2020-01-02T00:00:00+00:00"/>
+         <end value="2020-01-02T00:00:00+00:00"/>
+      </during>
+   </notAvailable>
+</HealthcareService>
