@@ -39,6 +39,7 @@ node_modules/
 !chatbot/**/
 !chatbot/**/*.json
 !chatbot/**/*.csv
+!vercel.json
 
 # System files
 .DS_Store
