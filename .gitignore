@@ -23,11 +23,22 @@ healthpoint_env/
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 
-# Data files
+# Data files (Original)
 *.csv
 *.json
 *.xlsx
 *.parquet
+
+# Next.js Ignores
+.next/
+node_modules/
+.env*.local
+
+# Allow Chatbot project files
+!chatbot/
+!chatbot/**/
+!chatbot/**/*.json
+!chatbot/**/*.csv
 
 # System files
 .DS_Store
