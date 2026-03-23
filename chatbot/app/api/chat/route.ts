@@ -9,15 +9,18 @@ export async function POST(req: Request) {
     const { messages } = await req.json();
 
     const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+    
+    // Graceful fallback for missing API key: return a mock message instead of a 500
     if (!apiKey) {
-      console.error('CRITICAL: GOOGLE_GENERATIVE_AI_API_KEY is not defined in environment variables.');
-      return new Response(JSON.stringify({ 
-        error: 'Gemini API Key missing. Please add GOOGLE_GENERATIVE_AI_API_KEY to your chatbot/.env.local file.',
-        code: 'MISSING_API_KEY'
-      }), { 
-        status: 500,
-        headers: { 'Content-Type': 'application/json' }
+      const responseStream = new ReadableStream({
+        start(controller) {
+          const encoder = new TextEncoder();
+          const message = "👋 **Hello! It looks like your Gemini API Key is missing.**\n\nTo enable my intelligence, please add `GOOGLE_GENERATIVE_AI_API_KEY` to your Vercel Project Settings (or your `.env.local` file for local development).\n\nOnce added, I'll be able to help you find practitioners from the repository!";
+          controller.enqueue(encoder.encode(message));
+          controller.close();
+        },
       });
+      return new StreamingTextResponse(responseStream);
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
