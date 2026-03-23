@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { GoogleGenerativeAIStream, StreamingTextResponse } from 'ai';
-import { searchPractitionersByService } from '@/lib/csv-utils';
+import { searchPractitioners } from '@/lib/csv-utils';
 
 export const runtime = 'nodejs';
 
@@ -11,60 +11,32 @@ export async function POST(req: Request) {
     const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
     if (!apiKey) {
       console.error('GOOGLE_GENERATIVE_AI_API_KEY is missing');
-      return new Response(JSON.stringify({ error: 'API Key not configured in Vercel' }), { status: 500 });
+      return new Response(JSON.stringify({ error: 'API Key not configured' }), { status: 500 });
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
     const lastUserMessage = messages[messages.length - 1].content;
     
-    let dataContext = '';
-    
-    // Keyword detection for service search
-    const serviceQueryPattern = /(?:practitioners? for|who works at|practitioners? at)\s+([\w\s&-]+)/i;
-    const match = lastUserMessage.match(serviceQueryPattern);
-    
-    if (match && match[1]) {
-      const serviceName = match[1].trim();
-      const practitioners = await searchPractitionersByService(serviceName);
-      
-      if (practitioners.length > 0) {
-        dataContext = `\n\n[USER IS ASKING ABOUT SERVICE: ${serviceName}]\nFound practitioners:\n${JSON.stringify(practitioners, null, 2)}`;
-      } else {
-        dataContext = `\n\n[USER IS ASKING ABOUT SERVICE: ${serviceName}]\nNo practitioners found for this specific name.`;
-      }
-    }
+    // Improved data search: search for anything relevant in the CSV
+    const searchResults = await searchPractitioners(lastUserMessage);
+    const dataContext = searchResults.length > 0 
+      ? `\n\n[RELEVANT REPOSITORY DATA FOUND]:\n${JSON.stringify(searchResults, null, 2)}`
+      : '\n\n[NOTICE]: No exact matches found in the repository for this specific query.';
 
     const systemMessage = {
       role: 'system',
-      content: `You are the Nav-Disha AI Assistant. Your role is to help users explore and understand the Nav-Disha knowledge repository.
+      content: `You are the Nav-Disha AI Health Assistant. Your primary goal is to help users find information within our healthcare repository (CSV-based).
 
-Guidelines:
-- Answer questions clearly and simply.
-- If the user asks about a topic, explain it in a structured way:
-  1. Short definition
-  2. Key points
-  3. Example (if applicable)
-- If the user is unsure, guide them by suggesting relevant topics.
-- If the question is vague, ask a clarifying question before answering.
-- Keep responses concise but helpful.
+Data Usage Instructions:
+1. USE the [RELEVANT REPOSITORY DATA] provided below to answer the user's question accurately.
+2. If data is provided, mention specific details like doctor names, clinic names, cities, and contact info (phone/email).
+3. If no specific data is found for a query (indicated by [NOTICE]), provide general healthcare guidance based on common knowledge but invite them to try specific keywords like "Auckland", "General Practitioner", or "Dentist".
+4. Format your response clearly using bullet points and markdown for readability.
 
-Repository Awareness:
-- Treat all questions as related to a knowledge repository of structured topics, documents, and guidance.
-- If you don’t have exact data, provide a best-effort explanation instead of saying "I don’t know".
-- Do NOT mention that you are an AI model.
-
-Tone:
-- Friendly, helpful, and professional.
-- Not too long, not too short.
-
-Extra Behavior:
-- If the user says “show topics”, suggest categories.
-- If the user asks “where do I start”, give beginner guidance.
-- If the user asks something unrelated, gently steer them back to repository-related help.
+Tone: Professional, helpful, and concise.
 
 Knowledge Source:
-You have access to a repository of healthcare practitioners and services.
-Current Data Snippet (if applicable): ${dataContext || 'No specific search performed yet.'}`
+Current Data Snippet (if applicable): ${dataContext}`
     };
 
     const model = genAI.getGenerativeModel({ model: 'gemini-pro' });

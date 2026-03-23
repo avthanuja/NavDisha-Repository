@@ -38,13 +38,37 @@ export const getPractitionerData = async (): Promise<PractitionerRecord[]> => {
   });
 };
 
+export const searchPractitioners = async (query: string) => {
+  const data = await getPractitionerData();
+  const keywords = query.toLowerCase().split(/\s+/).filter(k => k.length > 2);
+  
+  if (keywords.length === 0) return [];
+
+  const results = data.filter(item => {
+    const searchString = Object.values(item).join(' ').toLowerCase();
+    return keywords.some(keyword => searchString.includes(keyword));
+  });
+
+  // Clean up and limit results to avoid token bloat
+  return results.slice(0, 10).map(p => ({
+    name: p.practitioner_name || 'N/A',
+    role: p.practitioner_role || p.practitioner_type || 'Practitioner',
+    specialisation: p.specialisation || 'General',
+    service: p.service_name,
+    city: p.city,
+    region: p.region,
+    phone: p.phone,
+    email: p.email,
+    wheelchair: p.wheelchair_access === 'yes' ? 'Available' : 'Not specified'
+  }));
+};
+
 export const searchPractitionersByService = async (serviceName: string) => {
   const data = await getPractitionerData();
   const results = data.filter(item => 
     item.service_name.toLowerCase().includes(serviceName.toLowerCase())
   );
   
-  // Clean up the results to only include relevant fields for the LLM
   return results.map(p => ({
     name: p.practitioner_name,
     role: p.practitioner_role || p.practitioner_type || 'N/A',
