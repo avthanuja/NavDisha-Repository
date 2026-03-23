@@ -10,8 +10,14 @@ export async function POST(req: Request) {
 
     const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
     if (!apiKey) {
-      console.error('GOOGLE_GENERATIVE_AI_API_KEY is missing');
-      return new Response(JSON.stringify({ error: 'API Key not configured' }), { status: 500 });
+      console.error('CRITICAL: GOOGLE_GENERATIVE_AI_API_KEY is not defined in environment variables.');
+      return new Response(JSON.stringify({ 
+        error: 'Gemini API Key missing. Please add GOOGLE_GENERATIVE_AI_API_KEY to your chatbot/.env.local file.',
+        code: 'MISSING_API_KEY'
+      }), { 
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);

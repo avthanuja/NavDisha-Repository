@@ -21,7 +21,17 @@ export interface PractitionerRecord {
 }
 
 export const getPractitionerData = async (): Promise<PractitionerRecord[]> => {
-  const csvFilePath = path.join(process.cwd(), 'data/service_practitioners.csv');
+  let csvFilePath = path.join(process.cwd(), 'data/service_practitioners.csv');
+  
+  if (!fs.existsSync(csvFilePath)) {
+    // Fallback for cases where process.cwd() is the repository root
+    csvFilePath = path.join(process.cwd(), 'chatbot/data/service_practitioners.csv');
+  }
+
+  if (!fs.existsSync(csvFilePath)) {
+    throw new Error(`CSV file not found at ${csvFilePath}. Please ensure the data directory is correctly placed.`);
+  }
+
   const csvFileContent = fs.readFileSync(csvFilePath, 'utf8');
   
   return new Promise((resolve, reject) => {
