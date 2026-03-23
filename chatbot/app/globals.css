@@ -1,16 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --primary: #6366f1;
-  --primary-hover: #4f46e5;
-  --primary-light: #e0e7ff;
-  --bg-main: #f8fafc;
+  --primary: #ff6b4a; /* User bubble color from example */
+  --primary-hover: #fa5a36;
+  --bg-main: #fcfcfc;
   --bg-chat: #ffffff;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --border-color: #f1f5f9;
-  --header-height: 72px;
-  --input-height: 80px;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --border-color: #f3f4f6;
+  --bot-bubble: #f3f4f6;
+  --header-height: 60px;
 }
 
 * {
@@ -32,66 +35,39 @@ h1, h2, h3, .font-heading {
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #e2e8f0;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #cbd5e1;
-}
-
-/* Full screen chat container */
 .app-container {
   display: flex;
+  flex-direction: column;
   height: 100vh;
   width: 100vw;
   background: white;
 }
 
-.chat-main {
-  flex: 1;
+.glass-header {
+  height: var(--header-height);
   display: flex;
-  flex-direction: column;
-  height: 100%;
-  position: relative;
-  background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.03) 0%, transparent 40%),
-              radial-gradient(circle at bottom left, rgba(99, 102, 241, 0.02) 0%, transparent 40%);
+  align-items: center;
+  padding: 0 1.5rem;
+  background: white;
+  border-bottom: 1px solid var(--bot-bubble);
+  z-index: 10;
 }
 
 .messages-container {
   flex: 1;
   overflow-y: auto;
-  padding: 2rem 1rem;
+  padding: 2rem 1.5rem;
   scroll-behavior: smooth;
-}
-
-.input-container {
-  padding: 1.5rem 2rem;
-  background: linear-gradient(to top, white 80%, rgba(255, 255, 255, 0));
-  position: sticky;
-  bottom: 0;
-  width: 100%;
+  background: white;
 }
 
 .message-bubble {
   max-width: 80%;
-  padding: 1rem 1.25rem;
-  border-radius: 1.5rem;
+  padding: 0.875rem 1.25rem;
   font-size: 0.9375rem;
   line-height: 1.5;
-  margin-bottom: 0.5rem;
+  border-radius: 1.25rem;
   position: relative;
-  transition: all 0.2s ease;
 }
 
 .message-user {
@@ -99,26 +75,42 @@ h1, h2, h3, .font-heading {
   color: white;
   border-bottom-right-radius: 0.25rem;
   align-self: flex-end;
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
 }
 
 .message-bot {
-  background: white;
+  background: var(--bot-bubble);
   color: var(--text-main);
-  border: 1px solid var(--border-color);
   border-bottom-left-radius: 0.25rem;
   align-self: flex-start;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
-.glass-header {
-  height: var(--header-height);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-color);
-  z-index: 10;
+.input-area {
+  padding: 1rem 1.5rem 1.5rem;
+  background: white;
+}
+
+.pill-button {
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  background: var(--bot-bubble);
+  color: var(--text-main);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.pill-button:hover {
+  background: #e5e7eb;
+}
+
+.search-input {
+  width: 100%;
+  height: 52px;
+  padding: 0 1.5rem;
+  background: var(--bot-bubble);
+  border: none;
+  border-radius: 1.5rem;
+  outline: none;
+  font-size: 0.9375rem;
 }
