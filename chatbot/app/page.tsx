@@ -3,239 +3,221 @@
 import { useChat } from 'ai/react';
 import { useEffect, useRef, useState } from 'react';
 import { 
-  Send, Bot, User, Stethoscope, Search, Info, 
-  MapPin, Phone, Mail, ArrowRight, Sparkles,
-  Heart, Activity, ShieldCheck
+  Send, Bot, User, Stethoscope, Sparkles,
+  Search, Info, Menu, MoreVertical, Plus,
+  Hash, Command, ShieldCheck, Heart, 
+  Settings, LogOut, ChevronRight
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function NavDishaHub() {
+export default function NavDishaChat() {
   const { messages, input, handleInputChange, handleSubmit, isLoading, setInput } = useChat({
     api: '/api/chat',
   });
 
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [messages, isLoading]);
 
-  const categories = [
-    { 
-      title: 'Auckland Services', 
-      desc: 'Top-rated clinics and doctors in the Auckland region.', 
-      icon: <MapPin className="text-blue-500" />,
-      query: 'List practitioners in Auckland'
-    },
-    { 
-      title: 'Specialists', 
-      desc: 'Find dermatologists, dentists, and radiologists.', 
-      icon: <Stethoscope className="text-teal-500" />,
-      query: 'Who are the specialist practitioners available?'
-    },
-    { 
-      title: 'Emergency Contacts', 
-      desc: 'Direct phone lines and emails for urgent care.', 
-      icon: <Activity className="text-rose-500" />,
-      query: 'What are the contact details for urgent care services?'
-    },
-    { 
-      title: 'Accessibility', 
-      desc: 'Services with full wheelchair and disabled access.', 
-      icon: <ShieldCheck className="text-emerald-500" />,
-      query: 'Which clinics have wheelchair access?'
-    }
+  const suggestions = [
+    "Find practitioners in Auckland",
+    "Who are the specialist practitioners?",
+    "Clinics with wheelchair access?",
+    "Urgent care contact details"
   ];
 
-  const handleCardClick = (query: string) => {
-    setInput(query);
-    document.getElementById('chat-section')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <div className="min-h-screen bg-[#fdfdfd] text-slate-900 selection:bg-blue-100">
-      
-      {/* Hero Section */}
-      <section className="relative px-6 pt-24 pb-20 border-b border-slate-100 overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue-50/50 to-transparent -z-10" />
-        <div className="max-w-6xl mx-auto flex flex-col items-center text-center">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-blue-700 text-sm font-bold mb-8"
+    <div className="app-container">
+      {/* Sidebar */}
+      <AnimatePresence mode="wait">
+        {isSidebarOpen && (
+          <motion.aside
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: 280, opacity: 1 }}
+            exit={{ width: 0, opacity: 0 }}
+            className="hidden md:flex flex-col bg-slate-900 text-slate-300 border-r border-slate-800"
           >
-            <Sparkles className="w-4 h-4" />
-            <span>AI-Powered Health Directory</span>
-          </motion.div>
-          
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900"
-          >
-            Nav-Disha Knowledge Hub
-          </motion.h1>
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-xl text-slate-500 max-w-2xl mb-12 leading-relaxed"
-          >
-            Explore structured insights, practitioners, and healthcare guidance in one unified platform. Powered by real-time data and AI assistance.
-          </motion.p>
-          
-          {/* Main Search Bar */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="w-full max-w-2xl relative group"
-          >
-            <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none">
-              <Search className="w-5 h-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
-            </div>
-            <input 
-              type="text" 
-              placeholder="Search for a clinic or ask a question..." 
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleCardClick(searchTerm)}
-              className="w-full h-16 pl-14 pr-32 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-slate-200/40 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all text-lg"
-            />
-            <button 
-              onClick={() => handleCardClick(searchTerm)}
-              className="absolute right-3 top-3 h-10 px-6 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all flex items-center gap-2"
-            >
-              Search
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Categories Grid */}
-      <section className="px-6 py-20 max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-          <div>
-            <h2 className="text-3xl font-bold text-slate-900 mb-2">Explore Categories</h2>
-            <p className="text-slate-500">Quickly find the most requested information from our database.</p>
-          </div>
-          <button className="text-blue-600 font-bold flex items-center gap-2 hover:gap-3 transition-all">
-            View all categories <ArrowRight className="w-4 h-4" />
-          </button>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {categories.map((cat, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ y: -8 }}
-              className="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-blue-900/5 transition-all cursor-pointer group"
-              onClick={() => handleCardClick(cat.query)}
-            >
-              <div className="w-12 h-12 rounded-2xl bg-white border border-slate-50 shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                {cat.icon}
+            <div className="p-6 flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-indigo-500 flex items-center justify-center text-white">
+                <Stethoscope size={18} strokeWidth={2.5} />
               </div>
-              <h3 className="text-xl font-bold mb-3 text-slate-900">{cat.title}</h3>
-              <p className="text-sm text-slate-500 mb-6">{cat.desc}</p>
-              <div className="text-xs font-bold text-blue-600 tracking-wider uppercase">Explore →</div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+              <span className="font-heading font-bold text-white text-lg tracking-tight">Nav-Disha</span>
+            </div>
 
-      {/* AI Chatbot Section */}
-      <section id="chat-section" className="px-6 py-20 bg-slate-50/50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">Nav-Disha Assistant</h2>
-            <p className="text-slate-500 max-w-xl mx-auto">Our AI assistant can help you cross-reference doctors, services, and location details in seconds.</p>
-          </div>
+            <div className="flex-1 px-4 py-2 overflow-y-auto space-y-6">
+              <div>
+                <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all group">
+                  <Plus size={18} className="text-white/60 group-hover:text-white transition-colors" />
+                  <span className="text-sm font-medium">New Conversation</span>
+                </button>
+              </div>
 
-          <div className="bg-white rounded-[40px] border border-slate-200 shadow-2xl shadow-blue-900/5 overflow-hidden flex flex-col h-[700px]">
-            {/* Chat Messages */}
-            <div 
-              ref={scrollRef}
-              className="flex-1 overflow-y-auto p-8 space-y-6 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-fixed"
-            >
-              {messages.length === 0 && (
-                <div className="h-full flex flex-col items-center justify-center text-center opacity-40">
-                  <Bot className="w-16 h-16 mb-4 text-blue-600" />
-                  <p className="text-lg font-medium">How can I help you today?</p>
-                </div>
-              )}
-              <AnimatePresence>
-                {messages.map((m) => (
-                  <motion.div
-                    key={m.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className={`flex items-start gap-4 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}
+              <div className="space-y-1">
+                <p className="px-4 text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Suggestions</p>
+                {suggestions.map((s, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setInput(s)}
+                    className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-white/5 transition-all text-left group"
                   >
-                    <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 shadow-sm ${
-                      m.role === 'user' ? 'bg-slate-900 text-white' : 'bg-blue-600 text-white'
-                    }`}>
-                      {m.role === 'user' ? <User className="w-5 h-5" /> : <Bot className="w-5 h-5" />}
-                    </div>
-                    <div className={`max-w-[75%] px-6 py-4 rounded-3xl text-sm leading-relaxed shadow-sm ${
-                      m.role === 'user' 
-                      ? 'bg-slate-900 text-white rounded-tr-none' 
-                      : 'bg-white text-slate-700 border border-slate-100 rounded-tl-none'
-                    }`}>
-                      <div className="whitespace-pre-wrap">{m.content}</div>
-                    </div>
-                  </motion.div>
+                    <Hash size={16} className="text-slate-600 group-hover:text-indigo-400 transition-colors" />
+                    <span className="text-sm truncate">{s}</span>
+                  </button>
                 ))}
-              </AnimatePresence>
+              </div>
+            </div>
+
+            <div className="p-4 border-t border-slate-800 space-y-1">
+              <button className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-white/5 transition-all">
+                <Settings size={18} />
+                <span className="text-sm font-medium">Settings</span>
+              </button>
+              <button className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-white/5 transition-all text-red-400">
+                <LogOut size={18} />
+                <span className="text-sm font-medium">Clear Chat</span>
+              </button>
+            </div>
+          </motion.aside>
+        )}
+      </AnimatePresence>
+
+      {/* Main Chat Area */}
+      <main className="chat-main">
+        {/* Top Header */}
+        <header className="glass-header">
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="p-2 hover:bg-slate-100 rounded-lg transition-colors text-slate-600"
+            >
+              <Menu size={20} />
+            </button>
+            <div className="flex flex-col">
+              <h1 className="text-sm font-bold text-slate-900 leading-none mb-1 flex items-center gap-2">
+                AI Health Assistant
+                <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+              </h1>
+              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Always Active</span>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-2">
+            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider">
+              <ShieldCheck size={12} className="text-emerald-500" />
+              Verified Repository
+            </div>
+            <button className="p-2 hover:bg-slate-100 rounded-lg transition-colors text-slate-600">
+              <MoreVertical size={20} />
+            </button>
+          </div>
+        </header>
+
+        {/* Messages */}
+        <div ref={scrollRef} className="messages-container flex flex-col gap-6">
+          {messages.length === 0 ? (
+            <div className="flex-1 flex flex-col items-center justify-center text-center p-8 max-w-lg mx-auto mt-20">
+              <div className="w-20 h-20 rounded-[32px] bg-indigo-50 flex items-center justify-center text-indigo-500 mb-8 relative">
+                <Bot size={40} />
+                <motion.div 
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ repeat: Infinity, duration: 2 }}
+                  className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-white shadow-sm flex items-center justify-center"
+                >
+                  <Sparkles size={12} className="text-amber-500" />
+                </motion.div>
+              </div>
+              <h2 className="text-3xl font-bold text-slate-900 mb-4 tracking-tight">How can I assist your health search?</h2>
+              <p className="text-slate-500 text-lg mb-10 leading-relaxed">
+                I'm your dedicated Nav-Disha assistant. Ask me about specialists, clinics, contact details, or accessibility features.
+              </p>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
+                {suggestions.map((s, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setInput(s)}
+                    className="p-4 rounded-2xl bg-white border border-slate-200 text-slate-700 hover:border-indigo-400 hover:bg-indigo-50/30 transition-all text-sm font-medium text-left flex items-center justify-between group"
+                  >
+                    {s}
+                    <ChevronRight size={16} className="text-slate-300 group-hover:text-indigo-500 -translate-x-2 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="max-w-4xl w-full mx-auto flex flex-col gap-6 h-full pb-20">
+              {messages.map((m) => (
+                <motion.div
+                  key={m.id}
+                  initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  className={`flex flex-col ${m.role === 'user' ? 'items-end' : 'items-start'}`}
+                >
+                  <div className={`flex items-end gap-2 ${m.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                    <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 shadow-sm ${
+                      m.role === 'user' ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'
+                    }`}>
+                      {m.role === 'user' ? <User size={16} /> : <Bot size={16} />}
+                    </div>
+                    <div className={`message-bubble ${m.role === 'user' ? 'message-user' : 'message-bot'}`}>
+                      <div className="prose prose-slate max-w-none whitespace-pre-wrap">
+                        {m.content}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
               {isLoading && (
-                <div className="flex gap-2 p-4 bg-slate-50 w-fit rounded-2xl animate-pulse">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" />
-                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce delay-100" />
-                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce delay-200" />
+                <div className="flex items-center gap-2 p-3 bg-white border border-slate-100 w-fit rounded-2xl shadow-sm self-start ml-10">
+                  <div className="flex gap-1">
+                    <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                  </div>
                 </div>
               )}
             </div>
+          )}
+        </div>
 
-            {/* Chat Input */}
-            <div className="p-8 border-t border-slate-100 bg-white">
-              <form onSubmit={handleSubmit} className="relative group">
-                <input
-                  value={input}
-                  onChange={handleInputChange}
-                  placeholder="Ask the assistant anything..."
-                  className="w-full h-16 pl-6 pr-16 rounded-2xl bg-slate-50 border-none focus:ring-4 focus:ring-blue-500/10 focus:bg-white transition-all text-slate-700 placeholder:text-slate-400"
-                />
+        {/* Input area */}
+        <div className="input-container">
+          <div className="max-w-4xl mx-auto relative">
+            <form onSubmit={handleSubmit} className="relative group">
+              <div className="absolute left-6 inset-y-0 flex items-center pointer-events-none">
+                <Command size={18} className="text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
+              </div>
+              <input
+                value={input}
+                onChange={handleInputChange}
+                placeholder="Message your health assistant..."
+                className="w-full h-[64px] pl-14 pr-32 rounded-[24px] bg-slate-100/50 border border-slate-200/50 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all text-slate-900 placeholder:text-slate-400 outline-none shadow-sm"
+              />
+              <div className="absolute right-2 top-2 bottom-2 flex items-center gap-2">
                 <button
                   type="submit"
                   disabled={!input.trim() || isLoading}
-                  className="absolute right-3 top-3 w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center hover:bg-blue-700 disabled:opacity-30 transition-all"
+                  className="h-[48px] px-6 bg-indigo-600 text-white rounded-[18px] flex items-center justify-center gap-2 hover:bg-indigo-700 disabled:opacity-30 disabled:grayscale transition-all font-bold text-sm shadow-lg shadow-indigo-600/20"
                 >
-                  <Send className="w-5 h-5" />
+                  Send
+                  <Send size={16} />
                 </button>
-              </form>
-              <div className="mt-4 flex items-center justify-center gap-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                <div className="flex items-center gap-1.5"><Heart className="w-3 h-3 text-rose-500" /> Human Centered</div>
-                <div className="flex items-center gap-1.5"><ShieldCheck className="w-3 h-3 text-emerald-500" /> Verified Data</div>
               </div>
+            </form>
+            <div className="mt-4 flex items-center justify-center gap-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+              <div className="flex items-center gap-1.5"><Heart size={12} className="text-rose-500" /> Human Centered</div>
+              <div className="flex items-center gap-1.5"><Search size={12} className="text-indigo-500" /> Smart Discovery</div>
+              <div className="flex items-center gap-1.5 text-slate-300">|</div>
+              <div className="hidden sm:flex items-center gap-1.5 italic font-normal normal-case">Press Enter to send</div>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="px-6 py-12 border-t border-slate-100 text-center">
-        <div className="flex items-center justify-center gap-3 mb-6">
-          <div className="p-2 bg-blue-600 rounded-lg shadow-lg shadow-blue-600/20 text-white">
-            <Stethoscope className="w-5 h-5" />
-          </div>
-          <span className="text-xl font-bold tracking-tight">Nav-Disha</span>
-        </div>
-        <p className="text-slate-400 text-sm">© 2026 Nav-Disha Healthcare Repository. All rights reserved.</p>
-      </footer>
+      </main>
     </div>
   );
 }
